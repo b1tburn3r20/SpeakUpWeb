@@ -1,7 +1,6 @@
-// src/pages/UpcomingBills/UpcomingBills.jsx
-
 import { useEffect, useState } from 'react';
 import Card from '../../components/Card/Card';
+import { Link } from 'react-router-dom';
 
 export default function UpcomingBills() {
   const [bills, setBills] = useState([]);
@@ -15,8 +14,10 @@ export default function UpcomingBills() {
   return (
     <div>
       <h1>Bills</h1>
-      {bills.map((bill, index) => (
-        <Card key={index} name={bill.pdf_name} summary={bill.summary} />
+      {bills.map((bill) => (
+        <Link to={`/bill/${bill._id}`} key={bill._id}>
+          <Card name={bill.pdf_name} summary={bill.summary} />
+        </Link>
       ))}
     </div>
   );

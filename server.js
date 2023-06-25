@@ -1,3 +1,4 @@
+const Summary = require('./models/Summary');
 const express = require('express');
 const path = require('path');
 const favicon = require('serve-favicon');
@@ -30,6 +31,14 @@ app.use('/api/summaries', require('./routes/api/summaries'));
 
 // The following "catch all" route (note the *) is necessary
 // to return the index.html on all non-AJAX/API requests
+app.get('/api/bills/:billId', async (req, res) => {
+  try {
+    const bill = await Summary.findById(req.params.billId);
+    res.json(bill);
+  } catch (error) {
+    res.status(500).json({ error: 'Failed to fetch bill details' });
+  }
+});
 app.get('/*', function (req, res) {
   res.sendFile(path.join(__dirname, 'build', 'index.html'));
 });
