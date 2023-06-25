@@ -1,12 +1,24 @@
-// models/Vote.js
+//models/Vote.js
 
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const voteSchema = new Schema({
-    user: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
-    bill: { type: mongoose.Schema.Types.ObjectId, ref: 'Summary' },
-    vote: { type: String, enum: [null, 'Pass', 'Veto'], default: null }
+    user: {
+        type: Schema.Types.ObjectId,
+        ref: 'User',
+        required: true
+    },
+    bill: {
+        type: Schema.Types.ObjectId,
+        ref: 'Summary',
+        required: true
+    },
+    vote: {
+        type: String,
+        enum: ['pass', 'veto', 'null'],
+        default: 'null'
+    }
 }, {
     timestamps: true
 });

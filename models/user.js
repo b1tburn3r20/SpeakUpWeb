@@ -1,4 +1,4 @@
-// models/user.js
+//models/user.js
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 const bcrypt = require('bcrypt');
@@ -17,7 +17,11 @@ const userSchema = new Schema({
   password: {
     type: String,
     required: true
-  }
+  },
+  votes: [{
+    type: Schema.Types.ObjectId,
+    ref: 'Vote'
+  }]
 }, {
   timestamps: true,
   toJSON: {
@@ -35,4 +39,5 @@ userSchema.pre('save', async function (next) {
   this.password = await bcrypt.hash(this.password, SALT_ROUNDS);
 });
 
-module.exports = mongoose.model('User', userSchema);
+// We first check if the model exists already. If it does, we simply return it. If it does not, we define and return it.
+module.exports = mongoose.models.User || mongoose.model('User', userSchema);

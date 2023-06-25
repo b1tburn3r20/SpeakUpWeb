@@ -22,3 +22,12 @@
     font-size: 25px; /* You can adjust the font size as needed */
     color: #70757a; /* Google Grey */
 }
+
+
+.bills-list {
+    /* other styles here */
+    display: flex; /* Establishes a flex container */
+    flex-wrap: wrap; /* Allows the cards to wrap to new lines */
+    justify-content: center; /* Centers cards horizontally */
+    align-items: flex-start; /* Makes cards align to the top of the container */
+}

@@ -1,0 +1,43 @@
+.auth-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2rem;
+  }
+  
+  .auth-heading {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: var(--blue); /* Apply your desired color */
+    margin-bottom: 2rem;
+  }
+  
+  .signup-text,
+  .login-text {
+    font-size: 1rem;
+    color: var(--text-light); /* Apply your desired color */
+    margin-top: 1rem;
+    text-align: center;
+  }
+  
+  .signup-link,
+  .login-link {
+    color: var(--text-light); /* Apply your desired color */
+    text-decoration: underline;
+    cursor: pointer;
+    border: none;
+    background: none;
+    outline: none;
+    padding: 0;
+  }
+  
+  .signup-link:hover,
+  .login-link:hover {
+    text-decoration: none;
+  }
+  
+  .signup-link:focus,
+  .login-link:focus {
+    box-shadow: 0 0 0 3px rgba(66, 133, 244, 0.5); /* Apply your desired focus style */
+  }
+  

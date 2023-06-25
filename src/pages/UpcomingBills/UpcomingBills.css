@@ -1,0 +1,33 @@
+/* UpcomingBills.css */
+
+.upcoming-bills {
+    text-align: center;
+  }
+  
+  .pagination {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: fixed;
+    top: 50%;
+    left: 1rem;
+    right: 1rem;
+    transform: translateY(-50%);
+  }
+  
+  .pagination-chevron {
+    font-size: 1.5rem;
+    padding: 0.5rem;
+  }
+  
+  @media (max-width: 768px) {
+    .pagination {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  
+    .pagination-chevron {
+      margin-bottom: 0.5rem;
+    }
+  }
+  

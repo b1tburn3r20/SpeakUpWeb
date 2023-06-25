@@ -1,8 +1,16 @@
-const Summary = require('./models/Summary');
+//server.js
 const express = require('express');
 const path = require('path');
 const favicon = require('serve-favicon');
 const logger = require('morgan');
+
+
+const User = require('./models/User');
+const Summary = require('./models/Summary');
+const Vote = require('./models/Vote');
+
+
+
 // Always require and configure near the top
 require('dotenv').config();
 // Connect to the database
@@ -28,9 +36,20 @@ const port = process.env.PORT || 3001;
 app.use('/api/users', require('./routes/api/users'));
 app.use('/api/summaries', require('./routes/api/summaries'));
 
+app.post('/api/vote', async (req, res) => {
+  try {
+    const { userId, billId, vote } = req.body;
+    const newVote = new Vote({ user: userId, bill: billId, vote });
+    const savedVote = await newVote.save();
+    await User.findByIdAndUpdate(userId, { $push: { votes: savedVote._id } });
+    await Summary.findByIdAndUpdate(billId, { $push: { votes: savedVote._id } });
+    res.status(200).json(savedVote);
+  } catch (error) {
+    console.error(error); // log the error
+    res.status(500).json({ error: 'Failed to cast vote' });
+  }
+});
 
-// The following "catch all" route (note the *) is necessary
-// to return the index.html on all non-AJAX/API requests
 app.get('/api/bills/:billId', async (req, res) => {
   try {
     const bill = await Summary.findById(req.params.billId);
@@ -39,6 +58,9 @@ app.get('/api/bills/:billId', async (req, res) => {
     res.status(500).json({ error: 'Failed to fetch bill details' });
   }
 });
+
+// The following "catch all" route (note the *) is necessary
+// to return the index.html on all non-AJAX/API requests
 app.get('/*', function (req, res) {
   res.sendFile(path.join(__dirname, 'build', 'index.html'));
 });

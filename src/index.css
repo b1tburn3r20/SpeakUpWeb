@@ -87,7 +87,7 @@ code {
 }
 
 p.error-message {
-  color: var(--orange);
+  color: var(--soft-red);
   text-align: center;
 }
 
@@ -123,7 +123,7 @@ a.button {
   margin: 1vmin;
   padding: 1vmin;
   color: var(--white);
-  background-color: var(--orange);
+  background-color: var(--blue);
   font-size: 2vmin;
   font-weight: bold;
   text-decoration: none;
