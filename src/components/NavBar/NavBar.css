@@ -1,0 +1,34 @@
+.navbar {
+    background-color: var(--grey-100);
+    padding: 1rem;
+    display: flex;
+    align-items: center;
+  }
+  
+  .nav-link {
+    margin-right: 1rem;
+    color: var(--text-dark);
+    text-decoration: none;
+    font-size: 1.2rem;
+  }
+  
+  .separator {
+    color: var(--text-light);
+  }
+  
+  .spacer {
+    flex-grow: 1;
+  }
+  
+  .welcome-msg {
+    margin-right: 1rem;
+    color: var(--text-dark);
+    font-weight: bold;
+  }
+  
+  .logout-link {
+    color: var(--soft-red);
+    text-decoration: none;
+    font-weight: bold;
+  }
+  
