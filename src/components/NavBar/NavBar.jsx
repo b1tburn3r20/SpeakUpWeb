@@ -15,7 +15,8 @@ export default function NavBar({ user, setUser }) {
   }
 
   return (
-    <nav className="navbar">
+    <nav className="navbar" data-aos="fade-down"
+      data-aos-duration="500">
       <Link to="/" className="nav-link">Home</Link>
       <Link to="/upcoming-bills" className="nav-link">Upcoming Bills</Link>
       <Link to={`/bill/${randomBillId}`} className="nav-link" onClick={setRandomBillId}>Vote</Link>

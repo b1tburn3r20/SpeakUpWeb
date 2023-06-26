@@ -10,7 +10,8 @@ export default function PassConfirm() {
     const [randomBillId, setRandomBillId] = useRandomBillId(bills);
 
     return (
-        <div className="pass-confirm-container">
+        <div className="pass-confirm-container" data-aos="fade-down"
+            data-aos-anchor-placement="top-center">
             <div className="confirm-card">
                 <h1>Thanks for Voting!</h1>
                 <p>You voted to pass {billName}</p>

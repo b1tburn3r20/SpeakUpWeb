@@ -13,6 +13,7 @@
     left: 1rem;
     right: 1rem;
     transform: translateY(-50%);
+    z-index: 3;
   }
   
   .pagination-chevron {
@@ -29,5 +30,11 @@
     .pagination-chevron {
       margin-bottom: 0.5rem;
     }
+  }
+  .bills-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: flex-start; /* Aligns items to the top */
   }
   

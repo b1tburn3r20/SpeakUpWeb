@@ -6,7 +6,7 @@
     border-radius: 15px;
     margin: 1rem;
     padding: 1rem;
-    width: 400px;
+    width: 500px;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen-Sans, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;
     display: inline-block;
     max-width: 100%;
@@ -38,7 +38,7 @@
   }
   
   .pass-button {
-    background-color: #4caf50;
+    background-color: #58c65c;
     color: #fff;
     padding: 8px 12px;
     border: none;
@@ -71,13 +71,76 @@
     flex-grow: 1;
     margin: 0 10px;
   }
-  
-  .pass-button {
-    background-color: #4caf50;
-    color: #fff;
-  }
-  
+
   .veto-button {
     background-color: var(--soft-red);
     color: #fff;
   }  
+  .card-tags {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center; /* Center the tags horizontally */
+    margin-top: 0.5rem;
+  }
+  
+  .card-tags span {
+    background-color: #f5f5f5;
+    color: #70757a;
+    font-size: 14px; /* Increase the font size for bigger tags */
+    padding: 6px 12px; /* Increase padding for bigger tags */
+    margin: 0.25rem; /* Adjust margin for spacing between tags */
+    border-radius: 4px;
+  }
+
+
+  .card-helps-hurts{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .card-helps-hurts-header{
+    text-align: center;
+    color: var(--text-light);
+    font-weight: bold;
+  }
+  .card-helps-hurts-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .card-helps,
+.card-hurts {
+  text-align: center;
+  color: var(--text-dark);
+  font-size: 1rem;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+.card-helps-hurts {
+  display: flex;
+  justify-content: center;
+}
+
+.grouping-cards {
+  margin-top: 10px;
+  padding: 10px;
+  min-height: 200px;
+  width: 100%;
+}
+
+.grouping-cards-positive{
+  border: 2px solid rgba(73, 200, 77, 0.625);
+  border-radius: 10px;
+}
+.grouping-cards-negative{
+  border: 2px solid rgba(200, 73, 73, 0.625);
+  border-radius: 10px;
+  margin-right: 10px;
+}
+.fade-in {
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.fade-in.aos-animate {
+  opacity: 1;
+}

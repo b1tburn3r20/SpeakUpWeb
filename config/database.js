@@ -11,3 +11,4 @@ db.on('connected', function () {
   // require your model files here
 
 });
+module.exports = db;

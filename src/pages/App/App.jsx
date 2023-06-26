@@ -17,10 +17,18 @@ export default function App() {
   const [bills, setBills] = useState([]);
 
   useEffect(() => {
-    fetch('/api/summaries')
+    fetch('/api/bills/upcoming-bills', {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${user.token}`
+      },
+      credentials: 'include',
+    })
       .then(response => response.json())
       .then(data => setBills(data));
   }, []);
+
 
   return (
     <main className="App">

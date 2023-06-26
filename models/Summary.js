@@ -1,16 +1,34 @@
-//models/summary.js
+//models/Summary.js
+
 const mongoose = require('mongoose');
-const Schema = mongoose.Schema;
+const { Schema } = mongoose;
 
-const summarySchema = new Schema({
-    pdf_name: String,
-    summary: String,
-    votes: [{
-        type: Schema.Types.ObjectId,
-        ref: 'Vote'
-    }]
-});
+const summarySchema = new Schema(
+    {
+        summary: {
+            type: String,
+            required: true,
+        },
+        bill_name: {
+            type: String,
+            required: true,
+        },
+        tags: [String],
+        helps: {
+            type: String,
+            required: true,
+        },
+        hurts: {
+            type: String,
+            required: true,
+        },
+        pass: [{ type: Schema.Types.ObjectId, ref: 'User' }],
+        veto: [{ type: Schema.Types.ObjectId, ref: 'User' }],
+        author: { type: Schema.Types.ObjectId, ref: 'User' },
+        updatedAt: { type: Date, default: Date.now },
+        createdAt: { type: Date, default: Date.now },
+    },
+    { collection: 'bill_summaries' } // Specify the collection name here
+);
 
-const Summary = mongoose.model('Summary', summarySchema);
-
-module.exports = Summary;
+module.exports = mongoose.models.Summary || mongoose.model('Summary', summarySchema);

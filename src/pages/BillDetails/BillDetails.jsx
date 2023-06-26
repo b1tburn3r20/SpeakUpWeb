@@ -44,15 +44,23 @@ function BillDetails({ user }) {
                     Veto
                 </button>
                 <div className="card-container">
-                    <Card name={billData.pdf_name} summary={billData.summary} />
+                    <Card
+                        bill_name={billData.bill_name}
+                        summary={billData.summary}
+                        tags={billData.tags}
+                        helps={billData.helps}
+                        hurts={billData.hurts}
+                        showDetails={true}
+                    />
                 </div>
+
+
                 <button className="pass-button" onClick={() => handleVote('pass')}>
                     Pass
                 </button>
             </div>
         </div>
     );
-
 }
 
 export default BillDetails;

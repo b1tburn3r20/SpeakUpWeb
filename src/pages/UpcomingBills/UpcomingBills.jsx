@@ -1,9 +1,11 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 import Card from '../../components/Card/Card';
 import { Link } from 'react-router-dom';
-import './UpcomingBills.css'; // Import the CSS file
+import './UpcomingBills.css';
 
-export default function UpcomingBills() {
+export default function UpcomingBills({ userId }) { // Assume userId is passed in props
   const [bills, setBills] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const billsPerPage = 9;
@@ -11,15 +13,24 @@ export default function UpcomingBills() {
   useEffect(() => {
     fetch('/api/summaries')
       .then(response => response.json())
-      .then(data => setBills(data));
+      .then(data => {
+        // Filter out the bills that the user has voted on
+        const unvotedBills = data.filter(bill =>
+          !bill.pass.includes(userId) &&
+          !bill.veto.includes(userId)
+        );
+        setBills(unvotedBills);
+      });
+  }, [userId]);
+
+  useEffect(() => {
+    AOS.init();
   }, []);
 
-  // Calculate the index range for the current page
   const indexOfLastBill = currentPage * billsPerPage;
   const indexOfFirstBill = indexOfLastBill - billsPerPage;
   const currentBills = bills.slice(indexOfFirstBill, indexOfLastBill);
 
-  // Handle pagination navigation
   const goToNextPage = () => {
     setCurrentPage(prevPage => prevPage + 1);
   };
@@ -30,7 +41,7 @@ export default function UpcomingBills() {
 
   return (
     <div className="upcoming-bills">
-      <h1>Whats New?</h1>
+      <h1 data-aos="fade">What's New?</h1>
       <div className="pagination">
         <button
           className="pagination-chevron"
@@ -50,7 +61,15 @@ export default function UpcomingBills() {
       <div className="bills-list">
         {currentBills.map((bill) => (
           <Link to={`/bill/${bill._id}`} key={bill._id}>
-            <Card name={bill.pdf_name} summary={bill.summary} />
+            <Card
+              bill_name={bill.bill_name}
+              summary={bill.summary}
+              tags={bill.tags}
+              showHelpsAndHurts={false}
+              className="fade-in"
+              data-aos="fade-in"
+              data-aos-duration="1000"
+            />
           </Link>
         ))}
       </div>

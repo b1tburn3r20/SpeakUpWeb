@@ -1,53 +1,50 @@
-//server.js
+// server.js
 const express = require('express');
 const path = require('path');
 const favicon = require('serve-favicon');
 const logger = require('morgan');
-
+const voteRouter = require('./routes/api/vote');
 
 const User = require('./models/User');
 const Summary = require('./models/Summary');
-const Vote = require('./models/Vote');
+const billsRouter = require('./routes/api/bills');
 
-
-
-// Always require and configure near the top
 require('dotenv').config();
-// Connect to the database
-require('./config/database');
+
+const db = require('./config/database');
+db.on('error', console.error.bind(console, 'connection error:'));
+db.once('open', function () {
+  console.log('Connected to the database successfully');
+});
 
 const app = express();
 
 app.use(logger('dev'));
 app.use(express.json());
 
-// Configure both serve-favicon & static middleware
-// to serve from the production 'build' folder
 app.use(favicon(path.join(__dirname, 'build', 'favicon.ico')));
 app.use(express.static(path.join(__dirname, 'build')));
 
-// Middleware to verify token and assign user object of payload to req.user.
-// Be sure to mount before routes
 app.use(require('./config/checkToken'));
 
 const port = process.env.PORT || 3001;
 
-// Put API routes here, before the "catch all" route
 app.use('/api/users', require('./routes/api/users'));
 app.use('/api/summaries', require('./routes/api/summaries'));
+app.use('/api/bills', billsRouter);
+app.use('/api', voteRouter);
+
 
 app.post('/api/vote', async (req, res) => {
-  try {
-    const { userId, billId, vote } = req.body;
-    const newVote = new Vote({ user: userId, bill: billId, vote });
-    const savedVote = await newVote.save();
-    await User.findByIdAndUpdate(userId, { $push: { votes: savedVote._id } });
-    await Summary.findByIdAndUpdate(billId, { $push: { votes: savedVote._id } });
-    res.status(200).json(savedVote);
-  } catch (error) {
-    console.error(error); // log the error
-    res.status(500).json({ error: 'Failed to cast vote' });
-  }
+  const { userId, billId, vote } = req.body;
+  console.log(`UserId: ${userId}, BillId: ${billId}, Vote: ${vote}`);
+  const user = await User.findById(userId);
+  user.votes.push({ summary: billId, vote: vote });
+  await user.save();
+  const summary = await Summary.findById(billId);
+  summary[vote].push(userId);
+  await summary.save();
+  res.json({ status: 'Vote recorded' });
 });
 
 app.get('/api/bills/:billId', async (req, res) => {
@@ -59,10 +56,13 @@ app.get('/api/bills/:billId', async (req, res) => {
   }
 });
 
-// The following "catch all" route (note the *) is necessary
-// to return the index.html on all non-AJAX/API requests
 app.get('/*', function (req, res) {
   res.sendFile(path.join(__dirname, 'build', 'index.html'));
+});
+
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+  res.status(500).send('Something broke!');
 });
 
 app.listen(port, function () {

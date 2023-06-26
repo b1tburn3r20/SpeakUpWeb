@@ -10,7 +10,8 @@ export default function VetoConfirm() {
     const [randomBillId, setRandomBillId] = useRandomBillId(bills);
 
     return (
-        <div className="veto-confirm-container">
+        <div className="veto-confirm-container" data-aos="fade-down"
+            data-aos-anchor-placement="top-center">
             <div className="confirm-card">
                 <h1>Thanks for Voting!</h1>
                 <p>You voted to veto {billName}</p>
