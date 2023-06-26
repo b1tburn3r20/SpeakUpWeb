@@ -37,14 +37,14 @@ export default function UpcomingBills() {
           disabled={currentPage === 1}
           onClick={goToPreviousPage}
         >
-          &lt;
+          <i className="fas fa-chevron-left"></i>
         </button>
         <button
           className="pagination-chevron"
           disabled={indexOfLastBill >= bills.length}
           onClick={goToNextPage}
         >
-          &gt;
+          <i className="fas fa-chevron-right"></i>
         </button>
       </div>
       <div className="bills-list">

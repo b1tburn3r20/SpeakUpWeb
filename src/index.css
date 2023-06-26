@@ -9,6 +9,10 @@
   --text-dark: #3E454D;
   --blue: #4285F4;
   --soft-red: #f85c5c;
+  --red: #d32f2f;
+  --green: #29c05e;
+  --soft-green: #4cd16d;
+  --light-red: #ff6565;
 
 }
 
@@ -31,7 +35,9 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
 }
-
+h1{
+  color: var(--text-dark)
+}
 #root {
   height: 100%;
 }

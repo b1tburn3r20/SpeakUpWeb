@@ -1,12 +1,11 @@
-// src/pages/BillDetails/BillDetails.jsx
-
 import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import Card from '../../components/Card/Card';
-import './BillDetails.css'; // Import the CSS file
+import './BillDetails.css';
 
-export default function BillDetails({ user }) {
+function BillDetails({ user }) {
     const { billId } = useParams();
+    const navigate = useNavigate();
     const [billData, setBillData] = useState(null);
 
     useEffect(() => {
@@ -26,9 +25,11 @@ export default function BillDetails({ user }) {
                 billId: billId,
                 vote: vote
             })
-        }).then(response => response.json())
+        })
+            .then(response => response.json())
             .then(data => {
                 // Update state if needed
+                navigate(`/${vote}-confirm/${billData.pdf_name}`); // Redirect to PassConfirm or VetoConfirm
             });
     }
 
@@ -51,4 +52,7 @@ export default function BillDetails({ user }) {
             </div>
         </div>
     );
+
 }
+
+export default BillDetails;

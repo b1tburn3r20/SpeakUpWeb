@@ -4,7 +4,7 @@ import LoginForm from '../../components/LoginForm/LoginForm';
 import './AuthPage.css'; // Import your custom stylesheet for the AuthPage
 
 export default function AuthPage({ setUser }) {
-  const [showSignUp, setShowSignUp] = useState(false);
+  const [showSignUp, setShowSignUp] = useState(true);
 
   return (
     <main className="auth-page">
@@ -13,16 +13,16 @@ export default function AuthPage({ setUser }) {
         <>
           <LoginForm setUser={setUser} />
           <p className="signup-text">
-            Already a user?
-            <button className="signup-link" onClick={() => setShowSignUp(false)}>Login</button>
+            New to SpeakUp?
+            <button className="signup-link" onClick={() => setShowSignUp(false)}>Sign Up</button>
           </p>
         </>
       ) : (
         <>
           <SignUpForm setUser={setUser} />
           <p className="login-text">
-            New to SpeakUp?
-            <button className="login-link" onClick={() => setShowSignUp(true)}>Sign up</button>
+            Already a User?
+            <button className="login-link" onClick={() => setShowSignUp(true)}>Login</button>
           </p>
         </>
       )}
