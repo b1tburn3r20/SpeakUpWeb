@@ -3,8 +3,9 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import Card from '../../components/Card/Card';
+import './BillDetails.css'; // Import the CSS file
 
-export default function BillDetails({ user }) { // add user prop
+export default function BillDetails({ user }) {
     const { billId } = useParams();
     const [billData, setBillData] = useState(null);
 
@@ -14,7 +15,7 @@ export default function BillDetails({ user }) { // add user prop
             .then(data => setBillData(data));
     }, [billId]);
 
-    function handleVote(vote) { // move inside BillDetails
+    function handleVote(vote) {
         fetch('/api/vote', {
             method: 'POST',
             headers: {
@@ -27,7 +28,7 @@ export default function BillDetails({ user }) { // add user prop
             })
         }).then(response => response.json())
             .then(data => {
-                // update state if needed
+                // Update state if needed
             });
     }
 
@@ -36,10 +37,18 @@ export default function BillDetails({ user }) { // add user prop
     }
 
     return (
-        <div>
-            <Card name={billData.pdf_name} summary={billData.summary} />
-            <button onClick={() => handleVote('pass')}>Pass</button>
-            <button onClick={() => handleVote('veto')}>Veto</button>
+        <div className="bill-details-container">
+            <div className="flex-container">
+                <button className="veto-button" onClick={() => handleVote('veto')}>
+                    Veto
+                </button>
+                <div className="card-container">
+                    <Card name={billData.pdf_name} summary={billData.summary} />
+                </div>
+                <button className="pass-button" onClick={() => handleVote('pass')}>
+                    Pass
+                </button>
+            </div>
         </div>
     );
 }
