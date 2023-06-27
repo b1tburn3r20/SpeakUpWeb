@@ -41,7 +41,7 @@ export default function UpcomingBills({ userId }) { // Assume userId is passed i
 
   return (
     <div className="upcoming-bills">
-      <h1 data-aos="fade">What's New?</h1>
+      <h1 data-aos="fade">Bills Soon To Be Voted On</h1>
       <div className="pagination">
         <button
           className="pagination-chevron"

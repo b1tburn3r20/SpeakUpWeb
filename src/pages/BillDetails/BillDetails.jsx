@@ -29,9 +29,10 @@ function BillDetails({ user }) {
             .then(response => response.json())
             .then(data => {
                 // Update state if needed
-                navigate(`/${vote}-confirm/${billData.pdf_name}`); // Redirect to PassConfirm or VetoConfirm
+                navigate(`/${vote}-confirm/${billData.bill_name}`); // Redirect to PassConfirm or VetoConfirm
             });
     }
+
 
     if (!billData) {
         return <div>Loading...</div>;
@@ -41,7 +42,7 @@ function BillDetails({ user }) {
         <div className="bill-details-container">
             <div className="flex-container">
                 <button className="veto-button" onClick={() => handleVote('veto')}>
-                    Veto
+                    I Oppose
                 </button>
                 <div className="card-container">
                     <Card
@@ -56,7 +57,7 @@ function BillDetails({ user }) {
 
 
                 <button className="pass-button" onClick={() => handleVote('pass')}>
-                    Pass
+                    I Approve
                 </button>
             </div>
         </div>

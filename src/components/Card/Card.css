@@ -144,3 +144,23 @@
 .fade-in.aos-animate {
   opacity: 1;
 }
+.vote-banner {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  padding: 10px;
+  color: white;
+  font-size: 1.2em;
+  text-align: center;
+  text-transform: uppercase;
+  opacity: 0.8;
+}
+
+.vote-banner-pass {
+  background-color: green;
+}
+
+.vote-banner-veto {
+  background-color: red;
+}

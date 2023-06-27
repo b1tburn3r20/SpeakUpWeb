@@ -1,0 +1,67 @@
+.profile-page {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 40px;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+  }
+  
+  .profile-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  
+  .profile-header h1 {
+    font-size: 24px;
+    margin-bottom: 8px;
+  }
+  
+  .profile-header p {
+    color: #777;
+  }
+  
+  .profile-bio {
+    margin-bottom: 20px;
+  }
+  
+  .profile-bio h2 {
+    font-size: 18px;
+    margin-bottom: 8px;
+  }
+  
+  .profile-bio p {
+    color: #333;
+  }
+  
+  .profile-votes h2 {
+    font-size: 18px;
+    margin-bottom: 16px;
+  }
+  
+  .profile-votes ul {
+    list-style-type: none;
+    padding-left: 0;
+  }
+  
+  .profile-votes li {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 8px;
+    padding: 8px;
+    border-radius: 4px;
+    background-color: #f0f0f0;
+  }
+  
+  .profile-votes li span:first-child {
+    margin-right: 8px;
+    font-weight: bold;
+  }
+  
+  .profile-votes li span:last-child {
+    color: #777;
+  }
+  

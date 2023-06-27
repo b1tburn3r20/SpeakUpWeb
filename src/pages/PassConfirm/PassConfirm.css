@@ -12,7 +12,7 @@
 }
 
 .confirm-card {
-  background-color: rgba(220, 220, 220, 0.8);
+  background-color: rgba(239, 239, 239, 0.9);
   border-radius: 15px;
   padding: 20px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
@@ -26,6 +26,7 @@
   text-decoration: none;
   border-radius: 5px;
   transition: background-color 0.3s;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 }
 
 .random-vote-button:hover {

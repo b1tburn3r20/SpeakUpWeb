@@ -28,7 +28,6 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background-color: var(--grey-100);
-  padding: 2vmin;
   height: 100vh;
 }
 

@@ -35,6 +35,36 @@
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
   transition: background-color 0.3s, transform 0.3s;
 }
+.pass-button {
+  background-color: var(--soft-green);
+  color: #fff;
+  height: 60vh;
+  width: 20vw;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+  font-size: 2.5rem;
+  opacity: 0;
+  animation: fadeIn 0.5s 0.5s forwards;
+}
+
+.veto-button {
+  background-color: var(--light-red);
+  color: #fff;
+  height: 60vh;
+  width: 20vw;
+  font-size: 2.5rem;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+  opacity: 0;
+  animation: fadeIn 1s .5s forwards;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
 
 .pass-button:hover,
 .pass-button:focus {

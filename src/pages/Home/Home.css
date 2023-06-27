@@ -1,21 +1,260 @@
+:root {
+  --white: #FFFFFF;
+  --grey-100: #F8F9FA;
+  --grey-200: #E9ECEF;
+  --grey-300: #DEE2E6;
+  --grey-400: #CED4DA;
+  --orange: #F67F00;
+  --text-light: #6C757D;
+  --text-dark: #3E454D;
+  --blue: #4285F4;
+  --soft-red: #f85c5c;
+  --red: #d32f2f;
+  --green: #29c05e;
+  --soft-green: #4cd16d;
+  --light-red: #ff6565;
+}
+
 .home-container {
-    padding: 2rem;
-  }
-  
-  .hero-section {
-    text-align: center;
-    margin-bottom: 2rem;
-  }
-  
-  .hero-heading {
-    font-size: 2.5rem;
-    font-weight: bold;
-    color: var(--blue); /* Apply your desired color */
-  }
-  
-  .mission-statement {
-    font-size: 1.2rem;
-    color: var(--text-dark);
-    margin-top: 1rem;
-  }
-  
+  padding: 2rem;
+}
+
+.hero-section {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.hero-heading {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: var(--blue);
+}
+
+.mission-statement {
+  font-size: 1.2rem;
+  color: var(--text-dark);
+  margin-top: 1rem;
+}
+
+.cta-section {
+  background-color: var(--grey-100);
+  padding: 2rem;
+  border-radius: 10px;
+  margin-top: 2rem;
+}
+
+.cta-heading {
+  font-size: 2rem;
+  font-weight: bold;
+  color: var(--blue);
+}
+
+.cta-text {
+  font-size: 1.1rem;
+  color: var(--text-dark);
+  margin-top: 1rem;
+}
+
+.cta-list {
+  list-style-type: disc;
+  margin-left: 2rem;
+  color: var(--text-dark);
+}
+
+.cta-button {
+  background-color: var(--blue);
+  color: var(--white);
+  padding: 1rem 2rem;
+  border: none;
+  border-radius: 5px;
+  font-size: 1rem;
+  font-weight: bold;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+}
+
+.cta-button:hover {
+  background-color: var(--soft-blue);
+}
+
+/* Add any additional styles as needed */
+/* Existing Styles */
+/* ... */
+
+/* Styles for Features Section */
+.features-section {
+  padding: 2rem 0;
+  text-align: center;
+  border-top: 1px solid var(--grey-200);
+  border-bottom: 1px solid var(--grey-200);
+}
+
+.features-heading {
+  font-size: 2rem;
+  color: var(--blue);
+}
+
+.features-list {
+  list-style-type: none;
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  margin-top: 1rem;
+}
+
+.features-list li {
+  font-size: 1.1rem;
+  color: var(--text-dark);
+  margin: 1rem;
+  flex: 1 0 200px;
+}
+
+/* Styles for Testimonial Section */
+.testimonial-section {
+  padding: 2rem 0;
+  text-align: center;
+  background-color: var(--grey-100);
+  margin-top: 2rem;
+}
+
+.testimonial-heading {
+  font-size: 2rem;
+  color: var(--blue);
+}
+
+.testimonial-card {
+  border: 1px solid var(--grey-200);
+  padding: 1rem;
+  margin-top: 1rem;
+  border-radius: 10px;
+  background-color: var(--white);
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.testimonial-text {
+  font-size: 1.1rem;
+  color: var(--text-dark);
+}
+
+.testimonial-author {
+  font-size: 1rem;
+  color: var(--text-light);
+  margin-top: 0.5rem;
+}
+
+/* Styles for Join Section */
+.join-section {
+  padding: 2rem 0;
+  text-align: center;
+  border-top: 1px solid var(--grey-200);
+}
+
+.join-heading {
+  font-size: 2rem;
+  color: var(--blue);
+}
+
+/* CTA Button Styles */
+
+.cta-button:hover {
+  background-color: var(--soft-blue);
+}
+
+/* Add a second color for CTA button */
+.cta-button.join {
+  background-color: var(--green);
+}
+
+.cta-button.join:hover {
+  background-color: var(--soft-green);
+}
+
+/* Existing Styles */
+/* ... */
+
+/* Styles for the Hero Section */
+.hero-section {
+  text-align: center;
+  padding: 2rem;
+  background: linear-gradient(to right, var(--blue), var(--soft-blue));
+  color: var(--white);
+  border-radius: 15px;
+}
+
+.hero-heading {
+  font-size: 3rem;
+  font-weight: bold;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+}
+
+.hero-content {
+  margin-bottom: 2rem;
+}
+
+.mission-statement {
+  font-size: 1.3rem;
+  line-height: 1.5;
+  margin: 1rem 0;
+  font-weight: 500;
+}
+
+/* Styles for Call-to-action Section */
+.cta-section {
+  background-color: var(--white);
+  padding: 2rem;
+  border-radius: 15px;
+  color: var(--text-dark);
+  margin-top: 2rem;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.cta-heading {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: var(--blue);
+}
+
+.cta-text {
+  font-size: 1.2rem;
+  margin: 1rem 0;
+}
+
+.cta-list {
+  list-style-type: none;
+}
+
+.cta-list li {
+  font-size: 1.1rem;
+  margin-bottom: 1rem;
+  padding-left: 1rem;
+  line-height: 1.5;
+  position: relative;
+}
+
+.cta-list li:before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 6px;
+  height: 6px;
+  background-color: var(--orange);
+  border-radius: 50%;
+}
+
+.cta-button {
+  background-color: var(--orange);
+  color: var(--white);
+  padding: 1rem 2rem;
+  border: none;
+  border-radius: 50px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+}
+
+.cta-button:hover {
+  background-color: var(--red);
+}
