@@ -5,7 +5,7 @@ module.exports = function (req, res, next) {
   if (token) {
     token = token.replace('Bearer ', '');
     jwt.verify(token, process.env.SECRET, function (err, decoded) {
-      console.log(err, decoded);  // Add logging here
+      console.log(err, decoded);
       req.user = err ? null : decoded.user;
       req.exp = err ? null : new Date(decoded.exp * 1000);
       return next();

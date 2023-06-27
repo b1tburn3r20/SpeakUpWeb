@@ -9,19 +9,30 @@ module.exports = {
 };
 
 function checkToken(req, res) {
-  // req.user will always be there for you when a token is sent
   console.log('req.user', req.user);
   res.json(req.exp);
 }
 
 async function create(req, res) {
   try {
-    // Add the user to the db
     const user = await User.create(req.body);
     const token = createJWT(user);
     res.json(token);
   } catch (err) {
     res.status(400).json(err);
+  }
+}
+
+async function getUserDetails(req, res) {
+  const { id } = req.params;
+  try {
+    const user = await User.findById(id).populate('votes.summary');
+    if (!user) {
+      return res.status(404).json({ error: "User not found" });
+    }
+    res.json(user);
+  } catch (error) {
+    res.status(500).json({ error: 'Something went wrong' });
   }
 }
 
@@ -42,7 +53,6 @@ async function login(req, res) {
 
 function createJWT(user) {
   return jwt.sign(
-    // data payload
     { user },
     process.env.SECRET,
     { expiresIn: '24h' }

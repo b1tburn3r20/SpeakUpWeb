@@ -9,6 +9,8 @@ import UpcomingBills from '../UpcomingBills/UpcomingBills';
 import BillDetails from '../BillDetails/BillDetails';
 import VetoConfirm from '../VetoConfirm/VetoConfirm';
 import PassConfirm from '../PassConfirm/PassConfirm';
+import Footer from '../../components/Footer/Footer';
+import UserProfile from '../UserProfile/UserProfile';
 import Home from '../Home/Home';
 
 
@@ -36,8 +38,8 @@ export default function App() {
         <>
           <NavBar user={user} setUser={setUser} bills={bills} />
           <Routes>
-            {/* Route components in here */}
             <Route path="/" element={<Home />} />
+            <Route path="/profile/:userId" element={<UserProfile user={user} />} />
             <Route path="/bill/:billId" element={<BillDetails user={user} />} />
             <Route path="/upcoming-bills" element={<UpcomingBills userId={user._id} />} />
             <Route path="/veto-confirm/:billName" element={<VetoConfirm />} />
@@ -47,6 +49,8 @@ export default function App() {
       ) : (
         <AuthPage setUser={setUser} />
       )}
+      <Footer />
+
     </main>
 
   );
