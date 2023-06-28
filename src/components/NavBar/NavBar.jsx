@@ -20,7 +20,6 @@ export default function NavBar({ user, setUser }) {
       <Link to="/" className="nav-link">Home</Link>
       <Link to="/upcoming-bills" className="nav-link">Upcoming Bills</Link>
       <Link to={`/bill/${randomBillId}`} className="nav-link" onClick={setRandomBillId}>Vote</Link>
-      <Link to={`/profile/${user._id}`} className="nav-link">Profile</Link>
       <span className="spacer"></span>
       <span className="welcome-msg">Welcome, {user.name}</span>
       <Link to="" className="nav-link logout-link" onClick={handleLogOut}>Log Out</Link>

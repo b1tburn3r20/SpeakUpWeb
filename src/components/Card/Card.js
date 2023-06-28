@@ -1,15 +1,8 @@
-//src/components/Card/Card.js
-
 import './Card.css';
 
-export default function Card({ bill_name, summary, tags, helps, hurts, showHelpsAndHurts = true, voted, voteType }) {
+export default function Card({ bill_name, summary, tags, helps, hurts, showHelpsAndHurts = true }) {
     return (
-        <div className="card" data-aos='fade-up' data-aos-duration='1000'>
-            {voted && (
-                <div className={`vote-banner vote-banner-${voteType}`}>
-                    {voteType === 'pass' ? 'Passed' : 'Vetoed'}
-                </div>
-            )}
+        <div className="card" data-aos='zoom-in'>
             <h2 className="card-name">{bill_name}</h2>
             <p className="card-summary">{summary}</p>
             <div className="card-tags">
@@ -17,7 +10,7 @@ export default function Card({ bill_name, summary, tags, helps, hurts, showHelps
                     <span key={index}>{tag}</span>
                 ))}
             </div>
-            {showHelpsAndHurts && (
+            {showHelpsAndHurts &&
                 <div className="card-helps-hurts">
                     <div className='grouping-cards grouping-cards-negative'>
                         <div className="card-helps-hurts-header">Negatives</div>
@@ -32,7 +25,7 @@ export default function Card({ bill_name, summary, tags, helps, hurts, showHelps
                         </div>
                     </div>
                 </div>
-            )}
+            }
         </div>
     );
 }
