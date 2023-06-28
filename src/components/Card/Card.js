@@ -1,3 +1,5 @@
+//src/components/Card/Card.js
+
 import './Card.css';
 
 export default function Card({ bill_name, summary, tags, helps, hurts, showHelpsAndHurts = true, voted, voteType }) {

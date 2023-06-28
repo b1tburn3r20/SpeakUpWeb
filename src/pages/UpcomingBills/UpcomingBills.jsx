@@ -5,7 +5,7 @@ import Card from '../../components/Card/Card';
 import { Link } from 'react-router-dom';
 import './UpcomingBills.css';
 
-export default function UpcomingBills({ userId }) { // Assume userId is passed in props
+export default function UpcomingBills({ userId }) {
   const [bills, setBills] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const billsPerPage = 9;
@@ -14,11 +14,11 @@ export default function UpcomingBills({ userId }) { // Assume userId is passed i
     fetch('/api/summaries')
       .then(response => response.json())
       .then(data => {
-        // Filter out the bills that the user has voted on
-        const unvotedBills = data.filter(bill =>
-          !bill.pass.includes(userId) &&
-          !bill.veto.includes(userId)
-        );
+        const unvotedBills = data.filter(bill => {
+          const passIds = bill.pass.map(id => id.toString());
+          const vetoIds = bill.veto.map(id => id.toString());
+          return !passIds.includes(userId) && !vetoIds.includes(userId);
+        });
         setBills(unvotedBills);
       });
   }, [userId]);

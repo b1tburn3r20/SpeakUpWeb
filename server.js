@@ -22,6 +22,11 @@ const app = express();
 app.use(logger('dev'));
 app.use(express.json());
 
+app.use((req, res, next) => {
+  console.log('Request Details:', req.method, req.url, req.headers);
+  next();
+});
+
 app.use(favicon(path.join(__dirname, 'build', 'favicon.ico')));
 app.use(express.static(path.join(__dirname, 'build')));
 
@@ -36,6 +41,7 @@ app.use('/api', voteRouter);
 
 
 app.post('/api/vote', async (req, res) => {
+  console.log('In /api/vote route');
   const { userId, billId, vote } = req.body;
   console.log(`UserId: ${userId}, BillId: ${billId}, Vote: ${vote}`);
   const user = await User.findById(userId);
@@ -48,6 +54,7 @@ app.post('/api/vote', async (req, res) => {
 });
 
 app.get('/api/bills/:billId', async (req, res) => {
+  console.log('In /api/bills/:billId route');
   try {
     const bill = await Summary.findById(req.params.billId);
     res.json(bill);
@@ -57,11 +64,12 @@ app.get('/api/bills/:billId', async (req, res) => {
 });
 
 app.get('/*', function (req, res) {
+  console.log('In /* route');
   res.sendFile(path.join(__dirname, 'build', 'index.html'));
 });
 
 app.use((err, req, res, next) => {
-  console.error(err.stack);
+  console.error('An error occurred:', err.stack);
   res.status(500).send('Something broke!');
 });
 

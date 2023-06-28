@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import { getUser } from '../../utilities/users-service';
@@ -13,24 +12,25 @@ import Footer from '../../components/Footer/Footer';
 import UserProfile from '../UserProfile/UserProfile';
 import Home from '../Home/Home';
 
-
 export default function App() {
   const [user, setUser] = useState(getUser());
   const [bills, setBills] = useState([]);
 
   useEffect(() => {
-    fetch('/api/bills/upcoming-bills', {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${user.token}`
-      },
-      credentials: 'include',
-    })
-      .then(response => response.json())
-      .then(data => setBills(data));
-  }, []);
-
+    if (user) {
+      fetch('/api/bills/upcoming-bills', {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${user.token}`
+        },
+        credentials: 'include',
+      })
+        .then(response => response.json())
+        .then(data => setBills(data))
+        .catch((error) => console.error('Error:', error));
+    }
+  }, [user]);
 
   return (
     <main className="App">
@@ -50,8 +50,6 @@ export default function App() {
         <AuthPage setUser={setUser} />
       )}
       <Footer />
-
     </main>
-
   );
 }
