@@ -159,3 +159,95 @@ button[type="submit"] {
   grid-column: span 2;
   margin: 1vmin 0 0;
 }
+
+
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+}
+
+body.light {
+  --bg-color: var(--grey-100);
+  --text-color: var(--text-dark);
+  --primary-color: var(--blue);
+  --error-color: var(--soft-red);
+  /* add other colors as needed */
+}
+
+body.dark {
+  --bg-color: #333333;
+  --text-color: #ffffff;
+  --primary-color: #1c86ee;
+  --error-color: #ff4d4d;
+}
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  height: 100vh;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+}
+
+h1 {
+  color: var(--text-color);
+}
+
+.section-heading {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+}
+
+.form-container {
+  background-color: var(--bg-color);
+}
+
+p.error-message {
+  color: var(--error-color);
+}
+
+input:focus {
+  border-color: var(--primary-color);
+}
+
+button,
+a.button {
+  color: var(--white);
+  background-color: var(--primary-color);
+}
+
+form:invalid button[type="submit"],
+button:disabled {
+  background-color: var(--error-color);
+}
+.card.dark {
+  background-color: #333333;
+  color: #ffffff;
+}
+
+.card.dark .card-name {
+  color: #ffffff;
+}
+
+.card.dark .card-summary {
+  color: #ffffff;
+}
+
+.card.dark .card-tags span {
+  color: #ffffff;
+}
+
+.card.dark .grouping-cards-negative,
+.card.dark .grouping-cards-positive {
+  background-color: #444444;
+  color: #ffffff;
+}
+
+/* add other styles as needed */

@@ -31,4 +31,49 @@
     text-decoration: none;
     font-weight: bold;
   }
+  .user-dropdown {
+    position: relative;
+    cursor: pointer;
+    z-index: 4;
+  }
+  
+  .dropdown-options {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .dropdown-option {
+    margin: 10px 0;
+  }body.light .navbar {
+    /* Your light mode styles here. For example: */
+    background-color: #ffffff;
+    color: #000000;
+  }
+  
+  body.dark .navbar {
+    /* Your dark mode styles here. For example: */
+    background-color: #333333;
+    color: #ffffff;
+  }
+  
+  body.light .nav-link,
+  body.light .dropdown-option,
+  body.light .logout-link {
+    /* Your light mode link styles here. For example: */
+    color: #000000;
+  }
+  
+  body.dark .nav-link,
+  body.dark .dropdown-option,
+  body.dark .logout-link {
+    /* Your dark mode link styles here. For example: */
+    color: #ffffff;
+  }
   

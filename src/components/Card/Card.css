@@ -164,3 +164,16 @@
 .vote-banner-veto {
   background-color: red;
 }
+/* CSS rules for .card under light theme */
+body.light .card {
+  /* light theme styles for card */
+  background-color: var(--grey-100);
+  color: var(--text-dark);
+}
+
+/* CSS rules for .card under dark theme */
+body.dark .card {
+  /* dark theme styles for card */
+  background-color: #333333;
+  color: #ffffff;
+}
