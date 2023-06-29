@@ -1,137 +1,120 @@
-/* src/components/Card/Card.css */
-
 .card {
-    background-color: #fff;
-    border: 2px solid #e0e0e0;
-    border-radius: 15px;
-    margin: 1rem;
-    padding: 1rem;
-    width: 500px;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen-Sans, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;
-    display: inline-block;
-    max-width: 100%;
-    box-sizing: border-box;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  }
-  
-  .card-name {
-    font-weight: bold;
-    font-size: 1.2rem;
-    color: #4285f4;
-  }
-  
-  .card-summary {
-    font-size: 25px;
-    color: #70757a;
-  }
-  
-  .button-container {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 10px;
-    padding: 0 10px;
-  }
-  
-  .pass-button {
-    background-color: #58c65c;
-    color: #fff;
-    padding: 8px 12px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-  
-  .veto-button {
-    background-color: var(--soft-red);
-    color: #fff;
-    padding: 8px 12px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-  .bill-details-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-  }
-  
-  .flex-container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-  
-  .card-container {
-    flex-grow: 1;
-    margin: 0 10px;
-  }
+  background-color: var(--card-dark-mode);
+  border: 2px solid var(--border-color);
+  border-radius: 15px;
+  margin: 1rem;
+  padding: 1rem;
+  width: 500px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen-Sans, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;
+  display: inline-block;
+  max-width: 100%;
+  box-sizing: border-box;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s;
+}
 
-  .veto-button {
-    background-color: var(--soft-red);
-    color: #fff;
-  }  
-  .card-tags {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center; /* Center the tags horizontally */
-    margin-top: 0.5rem;
-  }
-  
-  .card-tags span {
-    background-color: #f5f5f5;
-    color: #70757a;
-    font-size: 14px; /* Increase the font size for bigger tags */
-    padding: 6px 12px; /* Increase padding for bigger tags */
-    margin: 0.25rem; /* Adjust margin for spacing between tags */
-    border-radius: 4px;
-  }
+.card:hover {
+  transform: scale(1.05) !important;
+}
 
-
-  .card-helps-hurts{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  .card-helps-hurts-header{
-    text-align: center;
-    color: var(--text-light);
-    font-weight: bold;
-  }
-  .card-helps-hurts-content {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-  .card-helps,
+.card-name {
+  font-weight: bold;
+  font-size: 1.2rem;
+  color: var(--text-color);
+}
+.card-summary {
+  font-size: 25px;
+  color: var(--header-color);
+}
+.button-container {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+  padding: 0 10px;
+}
+.pass-button {
+  background-color: #58c65c;
+  color: #fff;
+  padding: 8px 12px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.veto-button {
+  background-color: var(--soft-red);
+  color: #fff;
+  padding: 8px 12px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.bill-details-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+.flex-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.card-container {
+  flex-grow: 1;
+  margin: 0 10px;
+}
+.card-tags {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 0.5rem;
+}
+.card-tags span {
+  background-color: #f5f5f5;
+  color: #70757a;
+  font-size: 14px;
+  padding: 6px 12px;
+  margin: 0.25rem;
+  border-radius: 4px;
+}
+.card-helps-hurts {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.card-helps-hurts-header {
+  text-align: center;
+  color: var(--text-light);
+  font-weight: bold;
+}
+.card-helps-hurts-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.card-helps,
 .card-hurts {
   text-align: center;
   color: var(--text-dark);
   font-size: 1rem;
   font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
-.card-helps-hurts {
-  display: flex;
-  justify-content: center;
-}
-
 .grouping-cards {
   margin-top: 10px;
   padding: 10px;
   min-height: 200px;
   width: 100%;
 }
-
-.grouping-cards-positive{
+.grouping-cards-positive {
   border: 2px solid rgba(73, 200, 77, 0.625);
   border-radius: 10px;
 }
-.grouping-cards-negative{
+.grouping-cards-negative {
   border: 2px solid rgba(200, 73, 73, 0.625);
   border-radius: 10px;
   margin-right: 10px;
@@ -140,7 +123,6 @@
   opacity: 0;
   transition: opacity 0.3s ease-in-out;
 }
-
 .fade-in.aos-animate {
   opacity: 1;
 }
@@ -156,24 +138,36 @@
   text-transform: uppercase;
   opacity: 0.8;
 }
-
 .vote-banner-pass {
   background-color: green;
 }
-
 .vote-banner-veto {
   background-color: red;
 }
-/* CSS rules for .card under light theme */
-body.light .card {
-  /* light theme styles for card */
-  background-color: var(--grey-100);
-  color: var(--text-dark);
+:root {
+  --border-color: #e0e0e0;
+  --background-color: #fff;
+  --text-color: #4285f4;
+  --header-color: #70757a;
+}
+[data-theme="dark"] {
+  --border-color: #202124;
+  --background-color: #202124;
+  --text-color: #f8f9fa;
+  --header-color: #dadce0;
+  --card-dark-mode: #303135;
 }
 
-/* CSS rules for .card under dark theme */
-body.dark .card {
-  /* dark theme styles for card */
-  background-color: #333333;
-  color: #ffffff;
+
+[data-theme="dark"] .card-tags span {
+  background-color: #3c4043;
+  color: #bdbdbd;
+}
+[data-theme="dark"] .grouping-cards-header {
+  color: var(--text-dark);
+  font-weight: bold;
+}
+[data-theme="dark"] .grouping-cards-positive{
+  border: 2px solid #217adf;
+
 }

@@ -1,0 +1,26 @@
+[data-theme="dark"] .form-container {
+    background-color: #202124;
+    border-color: #343536;
+  }
+  
+  [data-theme="dark"] label {
+    color: #dadce0;
+  }
+  
+  [data-theme="dark"] input {
+    border-color: #444648;
+    background-color: #303135;
+  }
+  
+  [data-theme="dark"] button[type="submit"] {
+    color: #f8f9fa;
+    background-color: #3c4043;
+  }
+  [data-theme="dark"] button:disabled, form:invalid button[type="submit"] {
+    background-color: transparent;
+  }
+  
+  
+  [data-theme="dark"] .error-message {
+    color: #dc3545;
+  }

@@ -21,17 +21,17 @@ export default function UpcomingBills({ }) { // Assume userId is passed in props
   }, []);
 
 
-  // const indexOfLastBill = currentPage * billsPerPage;
-  // const indexOfFirstBill = indexOfLastBill - billsPerPage;
-  // const currentBills = bills.slice(indexOfFirstBill, indexOfLastBill);
+  const indexOfLastBill = currentPage * billsPerPage;
+  const indexOfFirstBill = indexOfLastBill - billsPerPage;
+  const currentBills = bills.slice(indexOfFirstBill, indexOfLastBill);
 
-  // const goToNextPage = () => {
-  //   setCurrentPage(prevPage => prevPage + 1);
-  // };
+  const goToNextPage = () => {
+    setCurrentPage(prevPage => prevPage + 1);
+  };
 
-  // const goToPreviousPage = () => {
-  //   setCurrentPage(prevPage => prevPage - 1);
-  // };
+  const goToPreviousPage = () => {
+    setCurrentPage(prevPage => prevPage - 1);
+  };
 
   return (
     <div className="upcoming-bills">
@@ -39,21 +39,21 @@ export default function UpcomingBills({ }) { // Assume userId is passed in props
       <div className="pagination">
         <button
           className="pagination-chevron"
-          disabled={currentPage === 1}
-        // onClick={goToPreviousPage}
+          onClick={goToPreviousPage}
+          style={{ visibility: currentPage > 1 ? 'visible' : 'hidden' }}
         >
           <i className="fas fa-chevron-left"></i>
         </button>
         <button
           className="pagination-chevron"
-        // disabled={indexOfLastBill >= bills.length}
-        // onClick={goToNextPage}
+          onClick={goToNextPage}
+          style={{ visibility: indexOfLastBill < bills.length ? 'visible' : 'hidden' }}
         >
           <i className="fas fa-chevron-right"></i>
         </button>
       </div>
       <div className="bills-list">
-        {bills.map((bill) => (
+        {currentBills.map((bill) => (
           <Link to={`/bill/${bill._id}`} key={bill._id}>
             <Card
               bill_name={bill.bill_name}
@@ -68,6 +68,5 @@ export default function UpcomingBills({ }) { // Assume userId is passed in props
         ))}
       </div>
     </div>
-
   );
 } 

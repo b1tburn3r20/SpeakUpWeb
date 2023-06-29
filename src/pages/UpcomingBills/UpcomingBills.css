@@ -20,6 +20,18 @@
     font-size: 1.5rem;
     padding: 0.5rem;
   }
+  [data-theme="dark"] .pagination-chevron {
+ 
+    background-color: #ccc;
+    color: #666;
+  }
+  
+  .pagination-chevron:disabled {
+    background-color: #666;
+    color: #ccc;
+    cursor: not-allowed;
+  }
+  
   
   @media (max-width: 768px) {
     .pagination {

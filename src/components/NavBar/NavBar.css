@@ -1,79 +1,98 @@
+:root {
+  --grey-100: #f8f9fa;
+  --text-dark: #70757a;
+  --text-light: #aaa;
+  --soft-red: #c62828;
+}
 .navbar {
-    background-color: var(--grey-100);
-    padding: 1rem;
-    display: flex;
-    align-items: center;
-  }
-  
-  .nav-link {
-    margin-right: 1rem;
-    color: var(--text-dark);
-    text-decoration: none;
-    font-size: 1.2rem;
-  }
-  
-  .separator {
-    color: var(--text-light);
-  }
-  
-  .spacer {
-    flex-grow: 1;
-  }
-  
-  .welcome-msg {
-    margin-right: 1rem;
-    color: var(--text-dark);
-    font-weight: bold;
-  }
-  
-  .logout-link {
-    color: var(--soft-red);
-    text-decoration: none;
-    font-weight: bold;
-  }
-  .user-dropdown {
-    position: relative;
-    cursor: pointer;
-    z-index: 4;
-  }
-  
-  .dropdown-options {
-    position: absolute;
-    top: 100%;
-    right: 0;
-    background-color: #fff;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    padding: 10px;
-    display: flex;
-    flex-direction: column;
-  }
-  
-  .dropdown-option {
-    margin: 10px 0;
-  }body.light .navbar {
-    /* Your light mode styles here. For example: */
-    background-color: #ffffff;
-    color: #000000;
-  }
-  
-  body.dark .navbar {
-    /* Your dark mode styles here. For example: */
-    background-color: #333333;
-    color: #ffffff;
-  }
-  
-  body.light .nav-link,
-  body.light .dropdown-option,
-  body.light .logout-link {
-    /* Your light mode link styles here. For example: */
-    color: #000000;
-  }
-  
-  body.dark .nav-link,
-  body.dark .dropdown-option,
-  body.dark .logout-link {
-    /* Your dark mode link styles here. For example: */
-    color: #ffffff;
-  }
-  
+  background-color: var(--grey-100);
+  padding: 1rem;
+  display: flex;
+  align-items: center;
+}
+.nav-link {
+  margin-right: 1rem;
+  color: var(--text-dark);
+  text-decoration: none;
+  font-size: 1.2rem;
+}
+.separator {
+  color: var(--text-light);
+}
+.spacer {
+  flex-grow: 1;
+}
+.welcome-msg {
+  margin-right: 1rem;
+  color: var(--text-dark);
+  font-weight: bold;
+  display: inline-block;
+  padding: 0.4rem .6rem;
+  border: 2px solid var(--text-light);
+  border-radius: 15px;
+  transition: background-color 0.6s ease;
+}
+.logout-link {
+  color: var(--soft-red);
+  text-decoration: none;
+  font-weight: bold;
+}
+.user-dropdown {
+  position: relative;
+  cursor: pointer;
+  z-index: 4;
+}
+.dropdown-options {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background-color: var(--background-color);
+  border: 1px solid var(--border-color);
+  border-radius: 5px;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+}
+.dropdown-option {
+  margin: 10px 0;
+}
+[data-theme="dark"] {
+  --grey-100: #202124;
+  --text-dark: #f8f9fa;
+  --text-light: #dadce0;
+  --soft-red: #c62828;
+}
+[data-theme="dark"] .dropdown-options {
+  background-color: var(--card-dark-mode);
+  border-color: var(--border-color);
+}
+.welcome-msg:hover {
+  background-color: var(--hover-color);
+  color: var(--text-light);
+}
+.wlcmsg {
+  color: var(--text-dark);
+  font-weight: bold;
+  display: inline-block;
+}
+.dropdown-options {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease;
+  visibility: hidden;
+  opacity: 0;
+}
+
+.dropdown-options.show {
+  max-height: 200px;  /* Change this to the maximum height your dropdown could reach */
+  visibility: visible;
+  opacity: 1;
+  transition: max-height 0.3s ease, visibility 0s linear 0s, opacity 0.3s linear;
+}
+
+::-webkit-scrollbar {
+  background-color: transparent ;
+}
+::-webkit-scrollbar-thumb {
+  background-color: none ;
+}

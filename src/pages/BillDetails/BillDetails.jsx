@@ -41,7 +41,7 @@ function BillDetails({ user }) {
         <div className="bill-details-container">
             <div className="flex-container">
                 <button className="veto-button" onClick={() => handleVote('veto')}>
-                    Veto
+                    Reject
                 </button>
                 <div className="card-container">
                     <Card
@@ -56,7 +56,7 @@ function BillDetails({ user }) {
 
 
                 <button className="pass-button" onClick={() => handleVote('pass')}>
-                    Pass
+                    Approve
                 </button>
             </div>
         </div>
