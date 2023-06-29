@@ -14,20 +14,10 @@ import Home from '../Home/Home';
 
 export default function App() {
   const [user, setUser] = useState(getUser());
+  console.log(user)
   const [bills, setBills] = useState([]);
 
-  useEffect(() => {
-    fetch('/api/bills/upcoming-bills', {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${user.token}`
-      },
-      credentials: 'include',
-    })
-      .then(response => response.json())
-      .then(data => setBills(data));
-  }, []);
+
 
 
   return (
@@ -39,7 +29,7 @@ export default function App() {
             {/* Route components in here */}
             <Route path="/" element={<Home />} />
             <Route path="/bill/:billId" element={<BillDetails user={user} />} />
-            <Route path="/upcoming-bills" element={<UpcomingBills userId={user._id} />} />
+            <Route path="/upcoming-bills" element={<UpcomingBills />} />
             <Route path="/veto-confirm/:billName" element={<VetoConfirm />} />
             <Route path="/pass-confirm/:billName" element={<PassConfirm />} />
           </Routes>

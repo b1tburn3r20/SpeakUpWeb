@@ -4,40 +4,34 @@ import 'aos/dist/aos.css';
 import Card from '../../components/Card/Card';
 import { Link } from 'react-router-dom';
 import './UpcomingBills.css';
+import * as billsAPI from '../../utilities/billUtils'
 
-export default function UpcomingBills({ userId }) { // Assume userId is passed in props
+export default function UpcomingBills({ }) { // Assume userId is passed in props
   const [bills, setBills] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const billsPerPage = 9;
 
-  useEffect(() => {
-    fetch('/api/summaries')
-      .then(response => response.json())
-      .then(data => {
-        // Filter out the bills that the user has voted on
-        const unvotedBills = data.filter(bill =>
-          !bill.pass.includes(userId) &&
-          !bill.veto.includes(userId)
-        );
-        setBills(unvotedBills);
-      });
-  }, [userId]);
-
-  useEffect(() => {
-    AOS.init();
+  useEffect(function () {
+    async function getMyBills() {
+      const myBills = await billsAPI.getAllBills()
+      setBills(myBills)
+      console.log(myBills)
+    }
+    getMyBills()
   }, []);
 
-  const indexOfLastBill = currentPage * billsPerPage;
-  const indexOfFirstBill = indexOfLastBill - billsPerPage;
-  const currentBills = bills.slice(indexOfFirstBill, indexOfLastBill);
 
-  const goToNextPage = () => {
-    setCurrentPage(prevPage => prevPage + 1);
-  };
+  // const indexOfLastBill = currentPage * billsPerPage;
+  // const indexOfFirstBill = indexOfLastBill - billsPerPage;
+  // const currentBills = bills.slice(indexOfFirstBill, indexOfLastBill);
 
-  const goToPreviousPage = () => {
-    setCurrentPage(prevPage => prevPage - 1);
-  };
+  // const goToNextPage = () => {
+  //   setCurrentPage(prevPage => prevPage + 1);
+  // };
+
+  // const goToPreviousPage = () => {
+  //   setCurrentPage(prevPage => prevPage - 1);
+  // };
 
   return (
     <div className="upcoming-bills">
@@ -46,20 +40,20 @@ export default function UpcomingBills({ userId }) { // Assume userId is passed i
         <button
           className="pagination-chevron"
           disabled={currentPage === 1}
-          onClick={goToPreviousPage}
+        // onClick={goToPreviousPage}
         >
           <i className="fas fa-chevron-left"></i>
         </button>
         <button
           className="pagination-chevron"
-          disabled={indexOfLastBill >= bills.length}
-          onClick={goToNextPage}
+        // disabled={indexOfLastBill >= bills.length}
+        // onClick={goToNextPage}
         >
           <i className="fas fa-chevron-right"></i>
         </button>
       </div>
       <div className="bills-list">
-        {currentBills.map((bill) => (
+        {bills.map((bill) => (
           <Link to={`/bill/${bill._id}`} key={bill._id}>
             <Card
               bill_name={bill.bill_name}
@@ -74,5 +68,6 @@ export default function UpcomingBills({ userId }) { // Assume userId is passed i
         ))}
       </div>
     </div>
+
   );
-}
+} 
