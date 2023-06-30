@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import './Profile.css';
 import { format } from 'date-fns';
 import axios from 'axios';
+import { userDropzone } from 'react-dropzone'
 
 const Profile = ({ user, setUser }) => {
     const [editingFields, setEditingFields] = useState({
