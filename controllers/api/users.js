@@ -1,3 +1,5 @@
+const express = require('express');
+const router = express.Router();
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 const User = require('../../models/User');
@@ -5,18 +7,20 @@ const User = require('../../models/User');
 module.exports = {
   create,
   login,
-  checkToken
+  checkToken,
+  getVotedBills,
 };
 
+
+
+
 function checkToken(req, res) {
-  // req.user will always be there for you when a token is sent
   console.log('req.user', req.user);
   res.json(req.exp);
 }
 
 async function create(req, res) {
   try {
-    // Add the user to the db
     const user = await User.create(req.body);
     const token = createJWT(user);
     res.json(token);
@@ -38,11 +42,18 @@ async function login(req, res) {
   }
 }
 
-/*--- Helper Functions --*/
+/* Add this function */
+async function getVotedBills(req, res) {
+  try {
+    // Fetch the bills that the user has voted on from your database
+    // The specific implementation will depend on your schema and database setup
+  } catch (err) {
+    res.status(500).json(err);
+  }
+}
 
 function createJWT(user) {
   return jwt.sign(
-    // data payload
     { user },
     process.env.SECRET,
     { expiresIn: '24h' }

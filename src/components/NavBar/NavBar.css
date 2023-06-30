@@ -96,3 +96,8 @@
 ::-webkit-scrollbar-thumb {
   background-color: none ;
 }
+a{
+  color: var(--text-light);
+  text-decoration: none;
+  font-weight: bold;
+}

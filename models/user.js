@@ -34,6 +34,9 @@ const userSchema = new Schema({
       required: true
     }
   }],
+  bio: { type: String, default: "bio" },
+  pronouns: { type: String, default: "pronouns" },
+  dateJoined: { type: Date, default: Date.now }
 }, {
   timestamps: true,
   toJSON: {
@@ -43,6 +46,7 @@ const userSchema = new Schema({
     }
   }
 });
+
 
 userSchema.pre('save', async function (next) {
   // 'this' is the user document

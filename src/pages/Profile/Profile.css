@@ -1,0 +1,33 @@
+.profile-card {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin-bottom: 20px;
+  }
+  
+  .profile-card h2 {
+    font-size: 24px;
+    margin-bottom: 10px;
+  }
+  
+  .profile-card p {
+    margin-bottom: 5px;
+  }
+  
+  .profile-card .label {
+    font-weight: bold;
+  }
+  
+  .profile-card .bio {
+    margin-top: 20px;
+  }
+  
+  .profile-card .joined {
+    margin-top: 10px;
+  }
+  
+  .profile-card .pronouns {
+    margin-top: 10px;
+  }
+  
