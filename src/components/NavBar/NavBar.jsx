@@ -54,10 +54,20 @@ export default function NavBar({ user, setUser, isDarkMode, setIsDarkMode }) {
           <Link to="/my-votes" className="dropdown-option">My Votes</Link> {/* Updated link */}
           <Link to="/profile" className="dropdown-option">Profile</Link>
           <DarkModeToggle
-            onChange={() => setIsDarkMode(prevMode => !prevMode)}
+            onChange={() => {
+              setIsDarkMode(prevMode => !prevMode);
+              if (localStorage.getItem('isDarkMode') === 'true') {
+                localStorage.removeItem('theme');
+                localStorage.removeItem('isDarkMode');
+              } else {
+                localStorage.setItem('theme', 'dark');
+                localStorage.setItem('isDarkMode', true);
+              }
+            }}
             checked={isDarkMode}
             size={60}
           />
+
         </div>
       </div>
       <Link to="" className="nav-link logout" onClick={handleLogOut}>Log Out</Link>
