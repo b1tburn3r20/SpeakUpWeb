@@ -1,4 +1,3 @@
-import { get } from "mongoose";
 import sendRequest from "./send-request";
 import { getToken } from './users-service';
 
@@ -21,3 +20,7 @@ export function getAllBills() {
 export function getUserBills() {
     return sendRequest(`${BASE_URL}/my-votes`, 'GET')
 }
+export function getAllBillsWithUserVotes(userId) {
+    return sendRequest(`${BASE_URL}/upcoming-bills?userId=${userId}`, 'GET')
+}
+

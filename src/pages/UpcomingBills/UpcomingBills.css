@@ -49,4 +49,6 @@
     justify-content: space-around;
     align-items: flex-start; /* Aligns items to the top */
   }
-  
+  .page-title{
+    margin-bottom: 2rem;
+  }

@@ -61,7 +61,7 @@ function BillDetails({ user }) {
                         helps={billData.helps}
                         hurts={billData.hurts}
                         showDetails={true}
-                        userVote={userVote} // This is the new prop
+                        userVote={userVote}
                     />
 
                 </div>

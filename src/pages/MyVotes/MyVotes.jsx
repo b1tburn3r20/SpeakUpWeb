@@ -59,6 +59,7 @@ export default function UpcomingBills({ }) { // Assume userId is passed in props
                             bill_name={bill.bill_name}
                             summary={bill.summary}
                             tags={bill.tags}
+                            userVote={bill.userVote}
                             showHelpsAndHurts={false}
                             className="fade-in"
                             data-aos="fade-in"

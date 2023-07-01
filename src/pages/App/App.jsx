@@ -48,7 +48,7 @@ export default function App() {
             <Route path="/profile" element={<Profile user={user} setUser={setUser} />} />
             <Route path="/bill/:billId" element={<BillDetails user={user} />} />
             <Route path="/my-votes" element={<MyVotes />} />
-            <Route path="/upcoming-bills" element={<UpcomingBills />} />
+            <Route path="/upcoming-bills" element={<UpcomingBills user={user} />} />
             <Route path="/veto-confirm/:billName" element={<VetoConfirm />} />
             <Route path="/pass-confirm/:billName" element={<PassConfirm />} />
           </Routes>

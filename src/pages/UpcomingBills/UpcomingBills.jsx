@@ -1,24 +1,24 @@
 import React, { useEffect, useState } from 'react';
-import AOS from 'aos';
 import 'aos/dist/aos.css';
 import Card from '../../components/Card/Card';
 import { Link } from 'react-router-dom';
 import './UpcomingBills.css';
 import * as billsAPI from '../../utilities/billUtils'
 
-export default function UpcomingBills({ }) { // Assume userId is passed in props
+export default function UpcomingBills({ user }) {
   const [bills, setBills] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const billsPerPage = 9;
 
   useEffect(function () {
-    async function myBills() {
-      const bills = await billsAPI.getAllBills();
-      setBills(bills);
+    async function fetchData() {
+      const billsWithUserVotes = await billsAPI.getAllBillsWithUserVotes(user._id);
+      console.log(billsWithUserVotes);
+      setBills(billsWithUserVotes);
     }
-    myBills();
+    fetchData();
+  }, [user._id]);
 
-  }, []);
 
 
   const indexOfLastBill = currentPage * billsPerPage;
@@ -35,7 +35,7 @@ export default function UpcomingBills({ }) { // Assume userId is passed in props
 
   return (
     <div className="upcoming-bills">
-      <h1 data-aos="fade">What's New?</h1>
+      <h1 className='page-title' data-aos="fade">Upcoming Bills</h1>
       <div className="pagination">
         <button
           className="pagination-chevron"
@@ -53,20 +53,25 @@ export default function UpcomingBills({ }) { // Assume userId is passed in props
         </button>
       </div>
       <div className="bills-list">
-        {currentBills.map((bill) => (
-          <Link to={`/bill/${bill._id}`} key={bill._id}>
-            <Card
-              bill_name={bill.bill_name}
-              summary={bill.summary}
-              tags={bill.tags}
-              showHelpsAndHurts={false}
-              className="fade-in"
-              data-aos="fade-in"
-              data-aos-duration="1000"
-            />
-          </Link>
-        ))}
+        {currentBills.map((bill) => {
+          console.log(bill.userVote);
+          return (
+            <Link to={`/bill/${bill._id}`} key={bill._id}>
+              <Card
+                bill_name={bill.bill_name}
+                summary={bill.summary}
+                tags={bill.tags}
+                userVote={bill.userVote} // Include user's vote
+                showHelpsAndHurts={false}
+                className="fade-in"
+                data-aos="fade-in"
+                data-aos-duration="1000"
+              />
+            </Link>
+          )
+        })}
+
       </div>
     </div>
   );
-} 
+}
