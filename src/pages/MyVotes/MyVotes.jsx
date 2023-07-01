@@ -1,23 +1,24 @@
 import React, { useEffect, useState } from 'react';
-import AOS from 'aos';
 import 'aos/dist/aos.css';
 import Card from '../../components/Card/Card';
+import ReactLoading from 'react-loading';
 import { Link } from 'react-router-dom';
 import './MyVotes.css';
-import * as billsAPI from '../../utilities/billUtils'
+import * as billsAPI from '../../utilities/billUtils';
 
-export default function UpcomingBills({ }) { // Assume userId is passed in props
+export default function UpcomingBills() {
+    const [loading, setLoading] = useState(true);
     const [bills, setBills] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
     const billsPerPage = 90;
 
-    useEffect(function () {
-        async function myBills() {
-            const bills = await billsAPI.getUserBills();
-            setBills(bills);
+    useEffect(() => {
+        async function fetchBills() {
+            const fetchedBills = await billsAPI.getUserBills();
+            setBills(fetchedBills);
+            setLoading(false);
         }
-        myBills();
-
+        fetchBills();
     }, []);
 
 
@@ -35,39 +36,53 @@ export default function UpcomingBills({ }) { // Assume userId is passed in props
 
     return (
         <div className="upcoming-bills">
-            <h1 data-aos="fade">My Votes</h1>
-            <div className="pagination">
-                <button
-                    className="pagination-chevron"
-                    onClick={goToPreviousPage}
-                    style={{ visibility: currentPage > 1 ? 'visible' : 'hidden' }}
-                >
-                    <i className="fas fa-chevron-left"></i>
-                </button>
-                <button
-                    className="pagination-chevron"
-                    onClick={goToNextPage}
-                    style={{ visibility: indexOfLastBill < bills.length ? 'visible' : 'hidden' }}
-                >
-                    <i className="fas fa-chevron-right"></i>
-                </button>
-            </div>
-            <div className="bills-list">
-                {currentBills.map((bill) => (
-                    <Link to={`/bill/${bill._id}`} key={bill._id}>
-                        <Card
-                            bill_name={bill.bill_name}
-                            summary={bill.summary}
-                            tags={bill.tags}
-                            userVote={bill.userVote}
-                            showHelpsAndHurts={false}
-                            className="fade-in"
-                            data-aos="fade-in"
-                            data-aos-duration="1000"
-                        />
-                    </Link>
-                ))}
-            </div>
+            {loading ? (
+                <div style={{
+                    display: 'flex',
+                    justifyContent: 'center',
+                    alignItems: 'flex-start',
+                    height: '100vh',
+                    paddingTop: '200px'
+                }}>
+                    <ReactLoading type="spin" color="#207adf" height={'10%'} width={'10%'} />
+                </div>
+            ) : (
+                <>
+                    <h1 data-aos="fade">My Votes</h1>
+                    <div className="pagination">
+                        <button
+                            className="pagination-chevron"
+                            onClick={goToPreviousPage}
+                            style={{ visibility: currentPage > 1 ? 'visible' : 'hidden' }}
+                        >
+                            <i className="fas fa-chevron-left"></i>
+                        </button>
+                        <button
+                            className="pagination-chevron"
+                            onClick={goToNextPage}
+                            style={{ visibility: indexOfLastBill < bills.length ? 'visible' : 'hidden' }}
+                        >
+                            <i className="fas fa-chevron-right"></i>
+                        </button>
+                    </div>
+                    <div className="bills-list">
+                        {currentBills.map((bill) => (
+                            <Link to={`/bill/${bill._id}`} key={bill._id}>
+                                <Card
+                                    bill_name={bill.bill_name}
+                                    summary={bill.summary}
+                                    tags={bill.tags}
+                                    userVote={bill.userVote}
+                                    showHelpsAndHurts={false}
+                                    className="fade-in"
+                                    data-aos="fade-in"
+                                    data-aos-duration="1000"
+                                />
+                            </Link>
+                        ))}
+                    </div>
+                </>
+            )}
         </div>
     );
-} 
+}
