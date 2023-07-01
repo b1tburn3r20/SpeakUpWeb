@@ -5,7 +5,7 @@ const favicon = require('serve-favicon');
 const logger = require('morgan');
 
 const Todo = require('./models/todo')
-const User = require('./models/User');
+const User = require('./models/user');
 const Summary = require('./models/Summary');
 const billsRouter = require('./routes/api/bills');
 const usersRouter = require('./routes/api/users');

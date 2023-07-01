@@ -1,5 +1,6 @@
 import { get } from "mongoose";
 import sendRequest from "./send-request";
+import { getToken } from './users-service';
 
 
 const BASE_URL = "/api/bills"
@@ -15,10 +16,8 @@ export function handleClickVote(bills, setRandomBillId) {
 }
 
 export function getAllBills() {
-    return sendRequest(BASE_URL + '/upcoming-bills', 'GET')
+    return sendRequest(`${BASE_URL}/upcoming-bills`, 'GET')
 }
 export function getUserBills() {
-    return sendRequest('/api/user/my-votes', 'GET')
+    return sendRequest(`${BASE_URL}/my-votes`, 'GET')
 }
-
-

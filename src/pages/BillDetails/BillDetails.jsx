@@ -7,12 +7,20 @@ function BillDetails({ user }) {
     const { billId } = useParams();
     const navigate = useNavigate();
     const [billData, setBillData] = useState(null);
+    const [userVote, setUserVote] = useState(null);
 
     useEffect(() => {
         fetch(`/api/bills/${billId}`)
             .then(response => response.json())
-            .then(data => setBillData(data));
-    }, [billId]);
+            .then(data => {
+                setBillData(data);
+                if (data.pass.includes(user._id)) {
+                    setUserVote('pass');
+                } else if (data.veto.includes(user._id)) {
+                    setUserVote('veto');
+                }
+            });
+    }, [billId, user._id]);
 
     function handleVote(vote) {
         fetch('/api/vote', {
@@ -28,7 +36,7 @@ function BillDetails({ user }) {
         })
             .then(response => response.json())
             .then(data => {
-                // Update state if needed
+                setUserVote(vote);
                 navigate(`/${vote}-confirm/${billData.pdf_name}`); // Redirect to PassConfirm or VetoConfirm
             });
     }
@@ -40,9 +48,11 @@ function BillDetails({ user }) {
     return (
         <div className="bill-details-container">
             <div className="flex-container">
-                <button className="veto-button" onClick={() => handleVote('veto')}>
-                    Reject
-                </button>
+                {!userVote && (
+                    <button className="veto-button" onClick={() => handleVote('veto')}>
+                        Veto
+                    </button>
+                )}
                 <div className="card-container">
                     <Card
                         bill_name={billData.bill_name}
@@ -51,16 +61,19 @@ function BillDetails({ user }) {
                         helps={billData.helps}
                         hurts={billData.hurts}
                         showDetails={true}
+                        userVote={userVote} // This is the new prop
                     />
+
                 </div>
-
-
-                <button className="pass-button" onClick={() => handleVote('pass')}>
-                    Approve
-                </button>
+                {!userVote && (
+                    <button className="pass-button" onClick={() => handleVote('pass')}>
+                        Pass
+                    </button>
+                )}
             </div>
         </div>
     );
+
 }
 
 export default BillDetails;

@@ -6,19 +6,20 @@ import { Link } from 'react-router-dom';
 import './MyVotes.css';
 import * as billsAPI from '../../utilities/billUtils'
 
-export default function MyVotes({ }) {
+export default function UpcomingBills({ }) { // Assume userId is passed in props
     const [bills, setBills] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
-    const billsPerPage = 9;
+    const billsPerPage = 90;
 
     useEffect(function () {
-        async function getMyBills() {
-            const myBills = await billsAPI.getUserBills();
-            setBills(myBills);
-            console.log(myBills);
+        async function myBills() {
+            const bills = await billsAPI.getUserBills();
+            setBills(bills);
         }
-        getMyBills();
+        myBills();
+
     }, []);
+
 
     const indexOfLastBill = currentPage * billsPerPage;
     const indexOfFirstBill = indexOfLastBill - billsPerPage;
@@ -34,7 +35,7 @@ export default function MyVotes({ }) {
 
     return (
         <div className="upcoming-bills">
-            <h1 data-aos="fade">What's New?</h1>
+            <h1 data-aos="fade">My Votes</h1>
             <div className="pagination">
                 <button
                     className="pagination-chevron"

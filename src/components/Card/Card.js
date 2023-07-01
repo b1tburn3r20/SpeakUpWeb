@@ -1,10 +1,11 @@
 import './Card.css';
 
-export default function Card({ bill_name, summary, tags, helps, hurts, showHelpsAndHurts = true, theme }) {
-    const cardClasses = `card ${theme === 'dark' ? 'dark' : ''}`;
+export default function Card({ bill_name, summary, tags, helps, hurts, showHelpsAndHurts = true, userVote }) {
+    const cardClasses = `card ${userVote === 'veto' ? 'userVetoed' : ''}`;
 
     return (
         <div className={cardClasses} data-aos="zoom-in">
+            {userVote && <div className='alreadyVoted'>You voted {userVote} on this Bill</div>}
             <h2 className="card-name">{bill_name}</h2>
             <p className="card-summary">{summary}</p>
             <div className="card-tags">

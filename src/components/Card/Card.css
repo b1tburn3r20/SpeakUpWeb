@@ -170,4 +170,67 @@
 [data-theme="dark"] .grouping-cards-positive{
   border: 2px solid #217adf;
 
+}.card {
+  position: relative;
+}
+
+
+/* Existing styles */
+
+.card {
+  /* Existing styles */
+  position: relative;
+  z-index: 5;
+}
+
+.alreadyVoted {
+  position: absolute;
+  top: -20px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: -100 !important;
+  width: 300px;
+  height: 40px;
+  background-color: #4285f4;
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 8px;
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+}
+.card {
+  /* Existing styles */
+  position: relative;
+  z-index: 1 !important;
+}
+/* Define your custom colors */
+:root {
+  --soft-green: #4cd16d;
+  --light-red: #ff6565;
+}
+
+/* Default styles */
+.alreadyVoted {
+  background-color: var(--soft-green);
+  color: #fff;
+}
+
+/* Dark theme styles */
+[data-theme="dark"] .alreadyVoted {
+  background-color: #207adf;
+  color: #fff;
+}
+
+/* Styles when the user has vetoed */
+.userVetoed .alreadyVoted {
+  background-color: var(--light-red);
+  color: #fff;
+}
+
+/* Dark theme styles when the user has vetoed */
+[data-theme="dark"] .userVetoed .alreadyVoted {
+  background-color: #904042;
+  color: #fff;
 }

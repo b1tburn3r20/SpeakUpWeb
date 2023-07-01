@@ -12,12 +12,12 @@ export default function UpcomingBills({ }) { // Assume userId is passed in props
   const billsPerPage = 9;
 
   useEffect(function () {
-    async function getMyBills() {
-      const myBills = await billsAPI.getAllBills()
-      setBills(myBills)
-      console.log(myBills)
+    async function myBills() {
+      const bills = await billsAPI.getAllBills();
+      setBills(bills);
     }
-    getMyBills()
+    myBills();
+
   }, []);
 
 

@@ -23,6 +23,7 @@ const userSchema = new Schema({
     type: String,
     required: true
   },
+  profilePicture: { type: String, default: '' },
   votes: [{
     summary: {
       type: Schema.Types.ObjectId,

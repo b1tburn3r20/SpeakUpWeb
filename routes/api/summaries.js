@@ -6,5 +6,10 @@ router.get('/', async function (req, res) {
     const summaries = await Summary.find({});
     res.json(summaries);
 });
+router.get('/my-votes', async function (req, res) {
+    const summaries = await Summary.find({});
+    res.json(summaries);
+});
+
 
 module.exports = router;

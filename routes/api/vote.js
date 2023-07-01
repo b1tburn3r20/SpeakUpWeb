@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const mongoose = require('mongoose');
-const User = require('../../models/User');
+const User = require('../../models/user');
 const Summary = require('../../models/Summary');
 
 router.post('/vote', async (req, res) => {
