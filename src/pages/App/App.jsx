@@ -6,6 +6,7 @@ import AuthPage from '../AuthPage/AuthPage';
 import NavBar from '../../components/NavBar/NavBar';
 import UpcomingBills from '../UpcomingBills/UpcomingBills';
 import BillDetails from '../BillDetails/BillDetails';
+import BillStatistics from '../BillStatistics/BillStatistics';
 import VetoConfirm from '../VetoConfirm/VetoConfirm';
 import PassConfirm from '../PassConfirm/PassConfirm';
 import Profile from '../Profile/Profile';
@@ -48,6 +49,7 @@ export default function App() {
             <Route path="/profile" element={<Profile user={user} setUser={setUser} />} />
             <Route path="/bill/:billId" element={<BillDetails user={user} />} />
             <Route path="/my-votes" element={<MyVotes />} />
+            <Route path="/bill-statistics" element={<BillStatistics />} />
             <Route path="/upcoming-bills" element={<UpcomingBills user={user} />} />
             <Route path="/veto-confirm/:billName" element={<VetoConfirm />} />
             <Route path="/pass-confirm/:billName" element={<PassConfirm />} />

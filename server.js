@@ -28,6 +28,8 @@ app.use(express.static(path.join(__dirname, 'build')));
 
 app.use(require('./config/checkToken'));
 
+
+
 const port = process.env.PORT || 3001;
 
 app.use('/api/users', usersRouter);

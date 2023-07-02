@@ -23,6 +23,18 @@ router.get('/upcoming-bills', checkToken, async (req, res) => {
         res.status(500).send("Server Error");
     }
 });
+router.get('/bill-statistics', async (req, res) => {
+    try {
+        const bills = await Bill.find({});
+        console.log(bills); // Logs the bills fetched from the database
+
+        return res.json(bills);
+    } catch (err) {
+        console.error(err);
+        res.status(500).send("Server Error");
+    }
+});
+
 
 // A function to get user's vote for a bill
 async function getUserVoteForBill(userId, billId) {

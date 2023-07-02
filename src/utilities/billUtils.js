@@ -17,6 +17,9 @@ export function handleClickVote(bills, setRandomBillId) {
 export function getAllBills() {
     return sendRequest(`${BASE_URL}/upcoming-bills`, 'GET')
 }
+export function getBillStats() {
+    return sendRequest(`${BASE_URL}/bill-statistics`, 'GET')
+}
 export function getUserBills() {
     return sendRequest(`${BASE_URL}/my-votes`, 'GET')
 }

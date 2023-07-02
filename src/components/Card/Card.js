@@ -9,7 +9,7 @@ export default function Card({ bill_name, summary, tags, helps, hurts, showHelps
             <h2 className="card-name">{bill_name}</h2>
             <p className="card-summary">{summary}</p>
             <div className="card-tags">
-                {tags.map((tag, index) => (
+                {(tags || []).map((tag, index) => (
                     <span key={index}>{tag}</span>
                 ))}
             </div>
