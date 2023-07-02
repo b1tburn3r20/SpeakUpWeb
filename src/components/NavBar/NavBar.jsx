@@ -47,6 +47,7 @@ export default function NavBar({ user, setUser, isDarkMode, setIsDarkMode }) {
       <Link to="/" className="nav-link">Home</Link>
       <Link to="/upcoming-bills" className="nav-link">Upcoming Bills</Link>
       <Link to={`/bill/${randomBillId}`} className="nav-link" onClick={setRandomBillId}>Vote</Link>
+      <Link to={`/bill-statistics`} className="nav-link">Statistics Page</Link>
       <span className="spacer"></span>
       <div className="user-dropdown" onClick={() => setShowDropdown(!showDropdown)}>
         <p className='wlcmsg'>Welcome,</p> <span className="welcome-msg">{user.name}</span>

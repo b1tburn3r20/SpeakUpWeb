@@ -5,6 +5,7 @@ const checkToken = require('../../config/checkToken');
 // Include the bill model
 const Bill = require('../../models/Summary');
 const Vote = require('../../models/Vote');
+const User = require('../../models/user')
 
 router.get('/upcoming-bills', checkToken, async (req, res) => {
     try {
@@ -23,10 +24,30 @@ router.get('/upcoming-bills', checkToken, async (req, res) => {
         res.status(500).send("Server Error");
     }
 });
+
+router.get('/:billId/users/count', async (req, res) => {
+    try {
+        const { billId } = req.params;
+        const bill = await Bill.findById(billId);
+
+        if (!bill) {
+            return res.status(404).json({ msg: 'Bill not found' });
+        }
+
+        const totalUsers = await User.countDocuments();
+        const turnoutRate = (bill.pass.length + bill.veto.length) / totalUsers;
+
+        res.json({ totalUsers, turnoutRate });
+    } catch (err) {
+        console.error(err);
+        res.status(500).send("Server Error");
+    }
+});
+
 router.get('/bill-statistics', async (req, res) => {
     try {
         const bills = await Bill.find({});
-        console.log(bills); // Logs the bills fetched from the database
+        console.log(bills);
 
         return res.json(bills);
     } catch (err) {

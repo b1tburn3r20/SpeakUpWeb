@@ -13,7 +13,7 @@ export default function BillStatistics() {
     useEffect(() => {
         async function fetchData() {
             try {
-                const billStats = await billsAPI.getBillStats();
+                const billStats = await billsAPI.getBillsStats();
                 console.log(billStats[0]); // Logs the first bill object
 
                 setBills(billStats);
@@ -48,7 +48,7 @@ export default function BillStatistics() {
                     <h1 className='page-title' data-aos="fade">Bill Statistics</h1>
                     <div className="bills-list">
                         {bills.map((bill) => (
-                            <Link to={`/bill/${bill._id}`} key={bill._id}>
+                            <Link to={`/bill-statistics/${bill._id}`} key={bill._id}>
                                 <Card
                                     bill_name={bill.bill_name}
                                     showHelpsAndHurts={false}
@@ -57,6 +57,7 @@ export default function BillStatistics() {
                                     data-aos-duration="1000"
                                 />
                             </Link>
+
                         ))}
                     </div>
                 </>
