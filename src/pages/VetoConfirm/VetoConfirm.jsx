@@ -10,15 +10,15 @@ export default function VetoConfirm() {
     const [randomBillId, setRandomBillId] = useRandomBillId(bills);
 
     return (
-        <div className="veto-confirm-container" data-aos="fade-down"
-            data-aos-anchor-placement="top-center">
-            <div className="confirm-card">
-                <h1>Thanks for Voting!</h1>
-                <p>You voted to veto {billName}</p>
-                <p>Make your voice heard and vote again!</p>
-                <Link to={`/bill/${randomBillId}`} className="random-vote-button" onClick={setRandomBillId}>
-                    Vote on a another bill
-                </Link>
+        <div className="veto-confirm-wrapper">
+            <div className="veto-confirm-container" data-aos="fade-down" data-aos-anchor-placement="top-center">
+                <div className="confirm-card">
+                    <h1>Thanks for Voting!</h1>
+                    <p>You voted to veto "{billName}"</p>
+                    <Link to={`/bill/${randomBillId}`} className="random-vote-button" onClick={setRandomBillId}>
+                        Vote on another bill
+                    </Link>
+                </div>
             </div>
         </div>
     );

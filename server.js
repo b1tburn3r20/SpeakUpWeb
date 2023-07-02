@@ -1,17 +1,15 @@
-// server.js
 const express = require('express');
 const path = require('path');
 const favicon = require('serve-favicon');
 const logger = require('morgan');
+const multer = require('multer');
 
-const Todo = require('./models/todo')
+const Todo = require('./models/todo');
 const User = require('./models/user');
 const Summary = require('./models/Summary');
 const billsRouter = require('./routes/api/bills');
 const usersRouter = require('./routes/api/users');
 const voteRouter = require('./routes/api/vote');
-
-
 
 require('dotenv').config();
 
@@ -30,7 +28,6 @@ app.use(express.static(path.join(__dirname, 'build')));
 
 app.use(require('./config/checkToken'));
 
-
 const port = process.env.PORT || 3001;
 
 app.use('/api/users', usersRouter);
@@ -38,7 +35,26 @@ app.use('/api/summaries', require('./routes/api/summaries'));
 app.use('/api/bills', billsRouter);
 app.use('/api/vote', voteRouter);
 
+// Configure multer for file upload
+const storage = multer.diskStorage({
+  destination: 'uploads/',
+  filename: function (req, file, cb) {
+    cb(null, file.originalname);
+  },
+});
+const upload = multer({ storage: storage });
 
+// Handle file upload
+app.post('/api/users/upload', upload.single('file'), (req, res) => {
+  const file = req.file;
+  if (!file) {
+    return res.status(400).json({ error: 'No file provided' });
+  }
+
+  // You can perform additional logic here if needed
+
+  return res.json({ fileUrl: file.path });
+});
 
 app.post('/profile', async (req, res) => {
   const { userId, bio, pronouns } = req.body;
@@ -65,7 +81,6 @@ app.post('/profile', async (req, res) => {
   }
 });
 
-
 app.post('/api/vote', async (req, res) => {
   const { userId, billId, vote } = req.body;
   console.log(`UserId: ${userId}, BillId: ${billId}, Vote: ${vote}`);
@@ -77,6 +92,7 @@ app.post('/api/vote', async (req, res) => {
   await summary.save();
   res.json({ status: 'Vote recorded' });
 });
+
 app.post('/api/todos', (req, res) => {
   const { title, description, dueDate } = req.body;
 
@@ -86,7 +102,6 @@ app.post('/api/todos', (req, res) => {
     description,
     dueDate,
   });
-
 
   newTodo.save((err, savedTodo) => {
     if (err) {

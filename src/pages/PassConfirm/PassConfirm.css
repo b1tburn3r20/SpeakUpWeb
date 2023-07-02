@@ -1,23 +1,28 @@
+:root{
+  --text-dark: #3E454D;
+  --blue: #4285F4;
+}
 .pass-confirm-container {
   text-align: center;
   margin-top: 50px;
   background-color: var(--soft-green);
-  min-height: 650px;
+  max-width: 900px;
+  min-height: 450px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   border-radius: 25px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1), 0 8px 16px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3), 0 8px 16px rgba(0, 0, 0, 0.3);
+  width: 80%;
+  margin-bottom: 20vh;
 }
-
 .confirm-card {
   background-color: rgba(239, 239, 239, 0.9);
   border-radius: 15px;
   padding: 20px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 }
-
 .random-vote-button {
   display: inline-block;
   padding: 10px 20px;
@@ -28,8 +33,22 @@
   transition: background-color 0.3s;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 }
-
 .random-vote-button:hover {
   background-color: #3367d6;
 }
-
+.pass-confirm-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100%;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+[data-theme="dark"] .pass-confirm-container{
+  background-color: #3aba65;
+  
+}
+[data-theme="dark"] .confirm-card h1 {
+  color: #3E454D;
+}

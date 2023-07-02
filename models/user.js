@@ -23,6 +23,11 @@ const userSchema = new Schema({
     type: String,
     required: true
   },
+  role: {
+    type: String,
+    enum: ['user', 'admin', 'developer', 'politician'],
+    default: 'user'
+  },
   profilePicture: { type: String, default: '' },
   votes: [{
     summary: {

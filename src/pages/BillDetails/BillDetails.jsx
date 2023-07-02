@@ -37,7 +37,7 @@ function BillDetails({ user }) {
             .then(response => response.json())
             .then(data => {
                 setUserVote(vote);
-                navigate(`/${vote}-confirm/${billData.pdf_name}`); // Redirect to PassConfirm or VetoConfirm
+                navigate(`/${vote}-confirm/${billData.bill_name}`); // Redirect to PassConfirm or VetoConfirm
             });
     }
 
