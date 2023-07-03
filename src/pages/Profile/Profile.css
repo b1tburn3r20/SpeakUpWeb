@@ -58,15 +58,46 @@
   border-bottom: 2px solid #007BFF;
   margin-bottom: 10px;
 }
-.drag-n-drop{
+
+[data-theme="dark"] .drag-n-drop{
   border: 2px dotted rgba(255, 255, 255, 0.5);
+}
+.drag-n-drop{
+  border: 2px dotted rgba(0, 0, 0, 0.5);
+  border-radius: 10px;
+
 }
 .profile-card .info-group {
   padding: 10px;
 }
-
+.activeUser{
+  display: flex;
+  flex-direction: column;
+}
 [data-theme="dark"] .profile-card {
   background-color: #2f3640; /* cool dark grey */
   color: white;
 }
 
+.info-group-container{
+  display: flex;
+  flex-direction: row;
+}
+.info-group{
+  margin-left: 3rem;
+}
+.activeUser {
+  text-align: center;
+}
+
+.activeUser .profileImageWrapper {
+  display: flex;
+  justify-content: center;
+}
+
+.activeUser img {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  object-fit: cover;
+}

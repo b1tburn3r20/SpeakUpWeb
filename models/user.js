@@ -28,7 +28,7 @@ const userSchema = new Schema({
     enum: ['user', 'admin', 'developer', 'politician'],
     default: 'user'
   },
-  profilePicture: { type: String, default: '' },
+  profilePicture: { type: String, default: 'https://i.imgur.com/7mXutdU.jpg' },
   votes: [{
     summary: {
       type: Schema.Types.ObjectId,

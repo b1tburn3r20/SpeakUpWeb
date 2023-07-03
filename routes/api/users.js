@@ -15,25 +15,29 @@ router.get('/voted-bills', ensureLoggedIn, usersCtrl.getVotedBills);
 const s3 = new AWS.S3({
     accessKeyId: process.env.AWS_ACCESS_KEY_ID,
     secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
-    region: process.env.AWS_REGION
+    region: process.env.AWS_REGION,
+    bucket: process.env.BUCKET_NAME,
 });
 
-router.post('/users/upload', upload.single('file'), (req, res) => {
-    const params = {
-        Bucket: 'speakupbucket', // your S3 bucket name
-        Key: req.file.filename, // file name to use for S3 object
-        Body: req.file.buffer, // file content
-        ContentType: req.file.mimetype,
-        ACL: 'public-read' // sets file to public read (be careful with this)
-    };
+// router.post('/users/upload', upload.single('file'), (req, res) => {
+//     console.log('blah')
+//     const params = {
+//         Bucket: 'speakupbucket',
+//         Key: req.file.filename,
+//         Body: req.file.buffer,
+//         ContentType: req.file.mimetype,
+//         ACL: 'public-read'
+//     };
 
-    s3.upload(params, (err, data) => {
-        if (err) {
-            return res.status(500).send(err);
-        }
-        res.json({ fileUrl: data.Location });
-    });
-});
+//     s3.upload(params, (err, data) => {
+//         if (err) {
+//             console.log(err)
+//             return res.status(500).send(err);
+//         }
+//         console.log(data, fileUrl)
+//         res.json({ fileUrl: data.Location });
+//     });
+// });
 
 router.put('/users/profile', ensureLoggedIn, async (req, res) => {
     try {

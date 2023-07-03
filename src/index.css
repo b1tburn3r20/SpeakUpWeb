@@ -80,6 +80,8 @@ h1 {
   background-color: var(--grey-100);
   border: .1vmin solid var(--grey-300);
   border-radius: 1vmin;
+  width: 100vw;
+
 }
 p.error-message {
   color: var(--soft-red);
@@ -91,6 +93,15 @@ form {
   gap: 1.25vmin;
   color: var(--text-light);
 }
+.form-container {
+  padding: 3vmin;
+  background-color: var(--grey-100);
+  border: .1vmin solid var(--grey-300);
+  border-radius: 1vmin;
+  width: 450px; /* Set the width to 450px */
+  margin: 0 auto; /* Center the form horizontally */
+}
+
 label {
   font-size: 2vmin;
   display: flex;

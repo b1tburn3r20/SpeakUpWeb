@@ -6,7 +6,7 @@ import Dropzone from 'react-dropzone';
 import AvatarEditor from 'react-avatar-editor';
 
 const Profile = ({ user, setUser }) => {
-    const [profileImage, setProfileImage] = useState(user.profileImage || '');
+    const [profileImage, setProfileImage] = useState(user.profilePicture || 'https://i.imgur.com/7mXutdU.jpg');
     const [selectedFile, setSelectedFile] = useState(null);
     const [image, setImage] = useState(null);
     const [editor, setEditor] = useState(null);
@@ -16,6 +16,7 @@ const Profile = ({ user, setUser }) => {
     };
 
     const setEditorRef = (editor) => setEditor(editor);
+
 
     const onSave = async () => {
         if (editor) {
@@ -72,6 +73,7 @@ const Profile = ({ user, setUser }) => {
     });
 
     const [editUser, setEditUser] = useState({ ...user });
+
     const editField = (field) => {
         setEditingFields((prevState) => ({
             ...prevState,
@@ -82,11 +84,12 @@ const Profile = ({ user, setUser }) => {
 
     const saveField = async (field) => {
         try {
-            await axios.put(
+            await axios.post(
                 '/api/users/profile',
                 {
                     userId: user._id,
-                    [field]: editUser[field]
+                    bio: editUser.bio,
+                    pronouns: editUser.pronouns
                 },
                 {
                     headers: {
@@ -96,7 +99,7 @@ const Profile = ({ user, setUser }) => {
                 }
             );
 
-            const updatedUser = { ...user, [field]: editUser[field] };
+            const updatedUser = { ...user, bio: editUser.bio, pronouns: editUser.pronouns };
             setUser(updatedUser);
         } catch (error) {
             console.error('Error:', error);
@@ -143,12 +146,37 @@ const Profile = ({ user, setUser }) => {
 
     return (
         <div className="profile-card">
+            <div className='activeUser'>
+                <h2>{user.name}</h2>
+                <div className='profileImageWrapper'>
+                    <img src={profileImage} alt='Profile Picture' />
+                </div>
+            </div>
+            <div className='info-group-container'>
+                <div className="info-group">
+                    <h3>Personal Info</h3>
+                    <p className="label">Bio:</p>
+                    {renderField('bio')}
+                    <p className="label">Pronouns:</p>
+                    {renderField('pronouns')}
+                </div>
+                <div className="info-group">
+                    <h3>Account Details</h3>
+                    <p className="label">Email:</p>
+                    <div>{user.email}</div>
+                    <p className="label">Bills voted on:</p>
+                    <div>{user.votes ? user.votes.length : 0}</div>
+                    <p className="label">Date Joined:</p>
+                    {renderField('dateJoined')}
+                </div>
+
+            </div>
             <Dropzone onDrop={onDrop}>
                 {({ getRootProps, getInputProps }) => (
                     <section>
                         <div {...getRootProps()} className='drag-n-drop'>
                             <input {...getInputProps()} />
-                            <p>Drag 'n' drop some files here, or click to select files</p>
+                            <p>Drag 'n' drop image, or click to select file</p>
                         </div>
                     </section>
                 )}
@@ -165,24 +193,7 @@ const Profile = ({ user, setUser }) => {
                     rotate={0}
                 />
             )}
-            <button onClick={onSave}>Save</button>
-            <h2>{user.name}</h2>
-            <div className="info-group">
-                <h3>Personal Info</h3>
-                <p className="label">Bio:</p>
-                {renderField('bio')}
-                <p className="label">Pronouns:</p>
-                {renderField('pronouns')}
-            </div>
-            <div className="info-group">
-                <h3>Account Details</h3>
-                <p className="label">Email:</p>
-                <div>{user.email}</div>
-                <p className="label">Bills voted on:</p>
-                <div>{user.votes ? user.votes.length : 0}</div>
-                <p className="label">Date Joined:</p>
-                {renderField('dateJoined')}
-            </div>
+            <button disabled={!image} onClick={onSave}>Save Image</button>
         </div>
     );
 };

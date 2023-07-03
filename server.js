@@ -3,15 +3,31 @@ const path = require('path');
 const favicon = require('serve-favicon');
 const logger = require('morgan');
 const multer = require('multer');
-
 const Todo = require('./models/todo');
 const User = require('./models/user');
 const Summary = require('./models/Summary');
 const billsRouter = require('./routes/api/bills');
 const usersRouter = require('./routes/api/users');
 const voteRouter = require('./routes/api/vote');
-
+const AWS = require('aws-sdk');
+const multerS3 = require('multer-s3');
 require('dotenv').config();
+
+
+AWS.config.update({
+  accessKeyId: process.env.AWS_ACCESS_KEY_ID,
+  secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
+  region: process.env.AWS_REGION,
+})
+const s3 = new AWS.S3()
+
+// const s3 = new AWS.S3({
+//   accessKeyId: process.env.AWS_ACCESS_KEY_ID,
+//   secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
+//   region: process.env.AWS_REGION,
+//   bucket: process.env.BUCKET_NAME,
+// });
+
 
 const db = require('./config/database');
 db.on('error', console.error.bind(console, 'connection error:'));
@@ -38,27 +54,43 @@ app.use('/api/bills', billsRouter);
 app.use('/api/vote', voteRouter);
 
 // Configure multer for file upload
-const storage = multer.diskStorage({
-  destination: 'uploads/',
-  filename: function (req, file, cb) {
-    cb(null, file.originalname);
-  },
+// const storage = multer.diskStorage({
+//   destination: 'uploads/',
+//   filename: function (req, file, cb) {
+//     cb(null, file.originalname);
+//   },
+// });
+// const upload = multer({ storage: storage });
+
+
+const upload = multer({
+  storage: multerS3({
+    s3: s3,
+    acl: 'public-read',
+    bucket: process.env.BUCKET_NAME,
+    key: function (req, file, cb) {
+      console.log(file)
+      cb(null, file.originalname);
+    }
+  })
 });
-const upload = multer({ storage: storage });
+
 
 // Handle file upload
-app.post('/api/users/upload', upload.single('file'), (req, res) => {
+app.post('/api/users/upload', upload.single('file'), (req, res, next) => {
+  console.log('something')
   const file = req.file;
+  console.log(file)
   if (!file) {
     return res.status(400).json({ error: 'No file provided' });
   }
 
   // You can perform additional logic here if needed
-
+  console.log(file.path)
   return res.json({ fileUrl: file.path });
 });
 
-app.post('/profile', async (req, res) => {
+app.put('/api/users/profile', async (req, res) => {
   const { userId, bio, pronouns } = req.body;
 
   try {
@@ -82,6 +114,7 @@ app.post('/profile', async (req, res) => {
     return res.status(500).json({ error: 'Internal server error' });
   }
 });
+
 
 app.post('/api/vote', async (req, res) => {
   const { userId, billId, vote } = req.body;
