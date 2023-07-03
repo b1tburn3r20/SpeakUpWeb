@@ -46,6 +46,9 @@ const storage = multer.diskStorage({
 });
 const upload = multer({ storage: storage });
 
+
+app.use('/api/photos', require('./routes/api/photos'));
+
 // Handle file upload
 app.post('/api/users/upload', upload.single('file'), (req, res) => {
   const file = req.file;

@@ -8,7 +8,6 @@ import UpcomingBills from '../UpcomingBills/UpcomingBills';
 import BillDetails from '../BillDetails/BillDetails';
 import BillStatistics from '../BillStatistics/BillStatistics';
 import ShowBillStatistics from '../ShowBillsStatistics/ShowBillsStatistics';
-
 import VetoConfirm from '../VetoConfirm/VetoConfirm';
 import PassConfirm from '../PassConfirm/PassConfirm';
 import Profile from '../Profile/Profile';
@@ -21,6 +20,7 @@ export default function App() {
   const [user, setUser] = useState(getUser());
   const [isDarkMode, setIsDarkMode] = useState(() => JSON.parse(localStorage.getItem('isDarkMode')) || false);
   const [todos, setTodos] = useState([]);
+
 
   useEffect(() => {
     document.body.dataset.theme = isDarkMode ? 'dark' : 'light';

@@ -1,11 +1,16 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import './Profile.css';
 import { format } from 'date-fns';
 import axios from 'axios';
 import Dropzone from 'react-dropzone';
 import AvatarEditor from 'react-avatar-editor';
+import * as photosAPI from '../../utilities/photos-api';
+
 
 const Profile = ({ user, setUser }) => {
+    const [photos, setPhotos] = useState([]);
+    const fileInputRef = useRef();
+    const [title, setTitle] = useState('');
     const [profileImage, setProfileImage] = useState(user.profileImage || '');
     const [selectedFile, setSelectedFile] = useState(null);
     const [image, setImage] = useState(null);
@@ -14,56 +19,27 @@ const Profile = ({ user, setUser }) => {
     const onDrop = (acceptedFiles) => {
         setImage(URL.createObjectURL(acceptedFiles[0]));
     };
-
+    useEffect(function () {
+        photosAPI.getAll().then(photos => setPhotos(photos));
+    }, []);
     const setEditorRef = (editor) => setEditor(editor);
 
-    const onSave = async () => {
-        if (editor) {
-            const canvasScaled = editor.getImageScaledToCanvas();
-            const blob = await new Promise((resolve) => canvasScaled.toBlob(resolve));
+    async function handleUpload() {
+        // Use FormData object to send the inputs in the fetch request
+        // https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch#uploading_a_file
+        const formData = new FormData();
+        formData.append('title', title);
+        formData.append('photo', fileInputRef.current.files[0]);
+        const newPhoto = await photosAPI.upload(formData);
+        setPhotos([newPhoto, ...photos]);
+        // Clear the description and file inputs
+        setTitle('');
+        fileInputRef.current.value = '';
+    }
 
-            const formData = new FormData();
-            formData.append('file', blob);
 
-            try {
-                const uploadResponse = await axios.post('/api/users/upload', formData, {
-                    headers: {
-                        'Content-Type': 'multipart/form-data',
-                    },
-                });
 
-                if (uploadResponse.data && uploadResponse.data.fileUrl) {
-                    const imageUrl = uploadResponse.data.fileUrl;
 
-                    try {
-                        const profileUpdateResponse = await axios.put(
-                            '/api/users/profile',
-                            {
-                                userId: user._id,
-                                profileImage: imageUrl,
-                            },
-                            {
-                                headers: {
-                                    'Content-Type': 'application/json',
-                                    Authorization: `Bearer ${localStorage.getItem('token')}`,
-                                },
-                            }
-                        );
-
-                        if (profileUpdateResponse.status === 200) {
-                            setProfileImage(imageUrl);
-                            setUser({ ...user, profileImage: imageUrl });
-                            console.log('Profile image saved successfully');
-                        }
-                    } catch (error) {
-                        console.error('Error saving profile image:', error);
-                    }
-                }
-            } catch (error) {
-                console.error('Error uploading image:', error);
-            }
-        }
-    };
 
 
     const [editingFields, setEditingFields] = useState({
@@ -165,7 +141,7 @@ const Profile = ({ user, setUser }) => {
                     rotate={0}
                 />
             )}
-            <button onClick={onSave}>Save</button>
+            <button onClick={handleUpload}>Upload Photo</button>
             <h2>{user.name}</h2>
             <div className="info-group">
                 <h3>Personal Info</h3>
