@@ -15,13 +15,6 @@ require('dotenv').config();
 
 
 
-// const s3 = new AWS.S3({
-//   accessKeyId: process.env.AWS_ACCESS_KEY_ID,
-//   secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
-//   region: process.env.AWS_REGION,
-//   bucket: process.env.BUCKET_NAME,
-// });
-
 
 AWS.config.update({
   accessKeyId: process.env.AWS_ACCESS_KEY_ID,
@@ -69,17 +62,6 @@ app.use('/api/summaries', require('./routes/api/summaries'));
 app.use('/api/bills', billsRouter);
 app.use('/api/vote', voteRouter);
 
-// Configure multer for file upload
-// const storage = multer.diskStorage({
-//   destination: 'uploads/',
-//   filename: function (req, file, cb) {
-//     cb(null, file.originalname);
-//   },
-// });
-// const upload = multer({ storage: storage });
-
-
-
 
 
 // Handle file upload
@@ -96,30 +78,32 @@ app.post('/api/users/upload', upload.single('profilepic'), (req, res, next) => {
   return res.json({ fileUrl: file.path });
 });
 
-// app.put('/api/users/profilepic', upload.single('profilepic'), async (req, res) => {
-//   const { userId, bio, pronouns } = req.body;
 
-//   try {
-//     // Find the user by userId
-//     const user = await User.findById(userId);
 
-//     if (!user) {
-//       return res.status(404).json({ error: 'User not found' });
-//     }
+app.put('/api/users/profile', async (req, res) => {
+  const { userId, bio, pronouns } = req.body;
 
-//     // Update the user's bio and pronouns
-//     user.bio = bio;
-//     user.pronouns = pronouns;
+  try {
+    // Find the user by userId
+    const user = await User.findById(userId);
 
-//     // Save the updated user
-//     await user.save();
+    if (!user) {
+      return res.status(404).json({ error: 'User not found' });
+    }
 
-//     return res.json({ message: 'Profile updated successfully' });
-//   } catch (error) {
-//     console.error('Error:', error);
-//     return res.status(500).json({ error: 'Internal server error' });
-//   }
-// });
+    // Update the user's bio and pronouns
+    user.bio = bio;
+    user.pronouns = pronouns;
+
+    // Save the updated user
+    await user.save();
+
+    return res.json(user);  // Return the updated user data
+  } catch (error) {
+    console.error('Error:', error);
+    return res.status(500).json({ error: 'Internal server error' });
+  }
+});
 
 
 app.post('/api/vote', async (req, res) => {

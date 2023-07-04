@@ -59,7 +59,7 @@ const Profile = ({ user, setUser }) => {
 
     const saveField = async (field) => {
         try {
-            await axios.post(
+            const res = await axios.put(   // assuming your backend accepts a PUT request for updating user details
                 '/api/users/profile',
                 {
                     userId: user._id,
@@ -74,7 +74,7 @@ const Profile = ({ user, setUser }) => {
                 }
             );
 
-            const updatedUser = { ...user, bio: editUser.bio, pronouns: editUser.pronouns };
+            const updatedUser = res.data;  // assuming your backend returns the updated user as a response
             setUser(updatedUser);
         } catch (error) {
             console.error('Error:', error);
@@ -83,9 +83,9 @@ const Profile = ({ user, setUser }) => {
                 ...prevState,
                 [field]: false
             }));
-            setEditUser({ ...user });
         }
     };
+
 
     const renderField = (field) => {
         if (editingFields[field]) {

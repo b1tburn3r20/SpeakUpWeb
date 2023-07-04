@@ -42,6 +42,14 @@
     -->
     <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
     <script>
+      function initGoogle() {
+        if (window.signUpForm) {
+          window.signUpForm.initGoogle();
+        }
+      }
+    </script>
+    <script async src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA3RtZ_HVIBl5TsrrVSuKxmbRNhc0oRKeQ&libraries=places&callback=initGoogle"></script>
+    <script>
       AOS.init();
     </script>
   </body>

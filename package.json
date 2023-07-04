@@ -4,6 +4,8 @@
   "private": true,
   "dependencies": {
     "@aws-sdk/client-s3": "^3.363.0",
+    "@googlemaps/js-api-loader": "^1.16.2",
+    "@react-google-maps/api": "^2.18.1",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
@@ -57,5 +59,8 @@
       "last 1 safari version"
     ]
   },
-  "proxy": "http://localhost:3001"
+  "proxy": "http://localhost:3001",
+  "devDependencies": {
+    "@svgr/webpack": "^8.0.1"
+  }
 }

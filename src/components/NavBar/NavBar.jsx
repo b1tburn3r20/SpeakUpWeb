@@ -50,7 +50,7 @@ export default function NavBar({ user, setUser, isDarkMode, setIsDarkMode }) {
       <Link to={`/bill-statistics`} className="nav-link">Statistics Page</Link>
       <span className="spacer"></span>
       <div className="user-dropdown" onClick={() => setShowDropdown(!showDropdown)}>
-        <p className='wlcmsg'>Welcome,</p> <span className="welcome-msg">{user.name}</span>
+        <p className='wlcmsg'>Welcome</p> <span className="welcome-msg">{user.name}</span>
         <div className={`dropdown-options ${showDropdown ? "show" : ""}`} onClick={(e) => e.stopPropagation()}>
           <Link to="/my-votes" className="dropdown-option">My Votes</Link> {/* Updated link */}
           <Link to="/profile" className="dropdown-option">Profile</Link>
