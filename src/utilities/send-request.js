@@ -1,12 +1,12 @@
 import { getToken } from './users-service';
 
-export default async function sendRequest(url, method = 'GET', payload = null) {
+export default async function sendRequest(url, method = 'GET', payload = null, payloadIsFormData = false) {
   // Fetch accepts an options object as the 2nd argument
   // used to include a data payload, set headers, etc. 
   const options = { method };
   if (payload) {
-    options.headers = { 'Content-Type': 'application/json' };
-    options.body = JSON.stringify(payload);
+    options.headers = payloadIsFormData ? {} : { 'Content-Type': 'application/json' };
+    options.body = payloadIsFormData ? payload : JSON.stringify(payload);
   }
   const token = getToken();
   if (token) {

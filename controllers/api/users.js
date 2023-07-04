@@ -3,12 +3,15 @@ const router = express.Router();
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 const User = require('../../models/user');
+const uploadFile = require('../../config/upload-file');
+
 
 module.exports = {
   create,
   login,
   checkToken,
   getVotedBills,
+  uploadProfilePic,
 };
 
 
@@ -29,6 +32,25 @@ async function create(req, res) {
   }
 }
 
+async function uploadProfilePic(req, res) {
+  console.log(req.file)
+  try {
+    if (req.file) {
+      // The uploadFile function will return the uploaded file's S3 endpoint
+      const photoURL = await uploadFile(req.file);
+      const user = await User.findById(req.user._id); // req.user._id should be set after JWT authentication
+      user.profilePicture = photoURL;
+      await user.save();
+      res.json(user);
+    } else {
+      throw new Error('Must select a file');
+    }
+  } catch (err) {
+    console.log(err)
+    res.status(400).json(err.message);
+  }
+}
+
 async function login(req, res) {
   try {
     const user = await User.findOne({ email: req.body.email });
@@ -39,6 +61,25 @@ async function login(req, res) {
     res.json(token);
   } catch (err) {
     res.status(400).json('Bad Credentials');
+  }
+}
+async function upload(req, res) {
+  try {
+    if (req.file) {
+      console.log(req.file);
+      // The uploadFile function will return the uploaded file's S3 endpoint
+      const photoURL = await uploadFile(req.file);
+      const photoDoc = await user.create({
+        url: photoURL,
+        // As usual, other inputs sent with the file are available on req.body
+        title: req.body.title
+      });
+      res.json(photoDoc);
+    } else {
+      throw new Error('Must select a file');
+    }
+  } catch (err) {
+    res.status(400).json(err.message);
   }
 }
 

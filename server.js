@@ -14,12 +14,6 @@ const multerS3 = require('multer-s3');
 require('dotenv').config();
 
 
-AWS.config.update({
-  accessKeyId: process.env.AWS_ACCESS_KEY_ID,
-  secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
-  region: process.env.AWS_REGION,
-})
-const s3 = new AWS.S3()
 
 // const s3 = new AWS.S3({
 //   accessKeyId: process.env.AWS_ACCESS_KEY_ID,
@@ -27,6 +21,28 @@ const s3 = new AWS.S3()
 //   region: process.env.AWS_REGION,
 //   bucket: process.env.BUCKET_NAME,
 // });
+
+
+AWS.config.update({
+  accessKeyId: process.env.AWS_ACCESS_KEY_ID,
+  secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
+  region: process.env.S3_REGION,
+})
+
+const s3 = new AWS.S3()
+
+const upload = multer({
+  storage: multerS3({
+    s3: s3,
+    acl: 'public-read',
+    bucket: process.env.S3_BUCKET,
+    key: function (req, file, cb) {
+      console.log(file)
+      cb(null, file.originalname);
+    }
+  })
+});
+
 
 
 const db = require('./config/database');
@@ -63,21 +79,11 @@ app.use('/api/vote', voteRouter);
 // const upload = multer({ storage: storage });
 
 
-const upload = multer({
-  storage: multerS3({
-    s3: s3,
-    acl: 'public-read',
-    bucket: process.env.BUCKET_NAME,
-    key: function (req, file, cb) {
-      console.log(file)
-      cb(null, file.originalname);
-    }
-  })
-});
+
 
 
 // Handle file upload
-app.post('/api/users/upload', upload.single('file'), (req, res, next) => {
+app.post('/api/users/upload', upload.single('profilepic'), (req, res, next) => {
   console.log('something')
   const file = req.file;
   console.log(file)
@@ -90,30 +96,30 @@ app.post('/api/users/upload', upload.single('file'), (req, res, next) => {
   return res.json({ fileUrl: file.path });
 });
 
-app.put('/api/users/profile', async (req, res) => {
-  const { userId, bio, pronouns } = req.body;
+// app.put('/api/users/profilepic', upload.single('profilepic'), async (req, res) => {
+//   const { userId, bio, pronouns } = req.body;
 
-  try {
-    // Find the user by userId
-    const user = await User.findById(userId);
+//   try {
+//     // Find the user by userId
+//     const user = await User.findById(userId);
 
-    if (!user) {
-      return res.status(404).json({ error: 'User not found' });
-    }
+//     if (!user) {
+//       return res.status(404).json({ error: 'User not found' });
+//     }
 
-    // Update the user's bio and pronouns
-    user.bio = bio;
-    user.pronouns = pronouns;
+//     // Update the user's bio and pronouns
+//     user.bio = bio;
+//     user.pronouns = pronouns;
 
-    // Save the updated user
-    await user.save();
+//     // Save the updated user
+//     await user.save();
 
-    return res.json({ message: 'Profile updated successfully' });
-  } catch (error) {
-    console.error('Error:', error);
-    return res.status(500).json({ error: 'Internal server error' });
-  }
-});
+//     return res.json({ message: 'Profile updated successfully' });
+//   } catch (error) {
+//     console.error('Error:', error);
+//     return res.status(500).json({ error: 'Internal server error' });
+//   }
+// });
 
 
 app.post('/api/vote', async (req, res) => {
@@ -160,6 +166,7 @@ app.get('/api/bills/:billId', async (req, res) => {
 app.get('/*', function (req, res) {
   res.sendFile(path.join(__dirname, 'build', 'index.html'));
 });
+app.use('/api/users', require('./routes/api/users'));
 
 app.use((err, req, res, next) => {
   console.error(err.stack);

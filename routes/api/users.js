@@ -4,8 +4,9 @@ const usersCtrl = require('../../controllers/api/users');
 const ensureLoggedIn = require('../../config/ensureLoggedIn');
 const AWS = require('aws-sdk');
 const multer = require('multer');
-const upload = multer({ dest: 'uploads/' }); // Multer middleware to handle multipart form data
+const upload = multer();
 const User = require('../../models/user');
+
 
 router.post('/', usersCtrl.create);
 router.post('/login', usersCtrl.login);
@@ -19,25 +20,8 @@ const s3 = new AWS.S3({
     bucket: process.env.BUCKET_NAME,
 });
 
-// router.post('/users/upload', upload.single('file'), (req, res) => {
-//     console.log('blah')
-//     const params = {
-//         Bucket: 'speakupbucket',
-//         Key: req.file.filename,
-//         Body: req.file.buffer,
-//         ContentType: req.file.mimetype,
-//         ACL: 'public-read'
-//     };
+router.post('/profilepic', upload.single('photo'), usersCtrl.uploadProfilePic);
 
-//     s3.upload(params, (err, data) => {
-//         if (err) {
-//             console.log(err)
-//             return res.status(500).send(err);
-//         }
-//         console.log(data, fileUrl)
-//         res.json({ fileUrl: data.Location });
-//     });
-// });
 
 router.put('/users/profile', ensureLoggedIn, async (req, res) => {
     try {

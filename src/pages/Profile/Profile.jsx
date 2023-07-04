@@ -1,70 +1,60 @@
-import React, { useState } from 'react';
+import { useState, useRef } from 'react';
 import './Profile.css';
 import { format } from 'date-fns';
 import axios from 'axios';
-import Dropzone from 'react-dropzone';
-import AvatarEditor from 'react-avatar-editor';
+import * as usersAPI from '../../utilities/users-api';
 
 const Profile = ({ user, setUser }) => {
     const [profileImage, setProfileImage] = useState(user.profilePicture || 'https://i.imgur.com/7mXutdU.jpg');
-    const [selectedFile, setSelectedFile] = useState(null);
+    const [formImage, setFormImage] = useState(null)
     const [image, setImage] = useState(null);
     const [editor, setEditor] = useState(null);
-
-    const onDrop = (acceptedFiles) => {
-        setImage(URL.createObjectURL(acceptedFiles[0]));
-    };
+    const fileInputRef = useRef();
 
     const setEditorRef = (editor) => setEditor(editor);
 
+    const onSave = async (evt) => {
+        evt.preventDefault();
+        const formData = new FormData()
+        formData.append('photo', formImage);
+        const updatedUser = await usersAPI.profilePic(formData)
+        setUser(updatedUser)
+        // console.log(updatedUser)
+    }
+    // const onSave = async () => {
+    //     if (editor) {
+    //         const canvasScaled = editor.getImageScaledToCanvas();
+    //         const blob = await new Promise((resolve) => canvasScaled.toBlob(resolve));
 
-    const onSave = async () => {
-        if (editor) {
-            const canvasScaled = editor.getImageScaledToCanvas();
-            const blob = await new Promise((resolve) => canvasScaled.toBlob(resolve));
+    //         const formData = new FormData();
+    //         formData.append('file', blob);
 
-            const formData = new FormData();
-            formData.append('file', blob);
+    //         try {
+    //             const profileUpdateResponse = await axios.put(
+    //                 '/api/users/profilepic',
+    //                 formData,
+    //                 {
+    //                     headers: {
+    //                         'Content-Type': 'multipart/form-data',
+    //                         Authorization: `Bearer ${localStorage.getItem('token')}`,
+    //                     },
+    //                 }
+    //             );
 
-            try {
-                const uploadResponse = await axios.post('/api/users/upload', formData, {
-                    headers: {
-                        'Content-Type': 'multipart/form-data',
-                    },
-                });
+    //             if (profileUpdateResponse.status === 200) {
+    //                 const updatedUser = profileUpdateResponse.data;
+    //                 const imageUrl = updatedUser.profilePicture;
 
-                if (uploadResponse.data && uploadResponse.data.fileUrl) {
-                    const imageUrl = uploadResponse.data.fileUrl;
+    //                 setProfileImage(imageUrl);
+    //                 setUser(updatedUser);
+    //                 console.log('Profile image saved successfully');
+    //             }
+    //         } catch (error) {
+    //             console.error('Error uploading and saving profile image:', error);
+    //         }
+    //     }
+    // };
 
-                    try {
-                        const profileUpdateResponse = await axios.put(
-                            '/api/users/profile',
-                            {
-                                userId: user._id,
-                                profileImage: imageUrl,
-                            },
-                            {
-                                headers: {
-                                    'Content-Type': 'application/json',
-                                    Authorization: `Bearer ${localStorage.getItem('token')}`,
-                                },
-                            }
-                        );
-
-                        if (profileUpdateResponse.status === 200) {
-                            setProfileImage(imageUrl);
-                            setUser({ ...user, profileImage: imageUrl });
-                            console.log('Profile image saved successfully');
-                        }
-                    } catch (error) {
-                        console.error('Error saving profile image:', error);
-                    }
-                }
-            } catch (error) {
-                console.error('Error uploading image:', error);
-            }
-        }
-    };
 
 
     const [editingFields, setEditingFields] = useState({
@@ -111,7 +101,6 @@ const Profile = ({ user, setUser }) => {
             setEditUser({ ...user });
         }
     };
-
     const renderField = (field) => {
         if (editingFields[field]) {
             return (
@@ -171,29 +160,12 @@ const Profile = ({ user, setUser }) => {
                 </div>
 
             </div>
-            <Dropzone onDrop={onDrop}>
-                {({ getRootProps, getInputProps }) => (
-                    <section>
-                        <div {...getRootProps()} className='drag-n-drop'>
-                            <input {...getInputProps()} />
-                            <p>Drag 'n' drop image, or click to select file</p>
-                        </div>
-                    </section>
-                )}
-            </Dropzone>
-            {image && (
-                <AvatarEditor
-                    ref={setEditorRef}
-                    image={image}
-                    width={250}
-                    height={250}
-                    border={50}
-                    color={[255, 255, 255, 0.6]} // RGBA
-                    scale={1.2}
-                    rotate={0}
-                />
-            )}
-            <button disabled={!image} onClick={onSave}>Save Image</button>
+            <section>
+                <form onSubmit={onSave}>
+                    <input type='file' onChange={(evt) => setFormImage(evt.target.files[0])} />
+                    <button type='submit'>Save Photo</button>
+                </form>
+            </section>
         </div>
     );
 };
