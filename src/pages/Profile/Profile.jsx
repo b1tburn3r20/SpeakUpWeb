@@ -3,59 +3,44 @@ import './Profile.css';
 import { format } from 'date-fns';
 import axios from 'axios';
 import * as usersAPI from '../../utilities/users-api';
+import { useDropzone } from 'react-dropzone';
+import AvatarEditor from 'react-avatar-editor';
 
 const Profile = ({ user, setUser }) => {
     const [profileImage, setProfileImage] = useState(user.profilePicture || 'https://i.imgur.com/7mXutdU.jpg');
-    const [formImage, setFormImage] = useState(null)
+    const [formImage, setFormImage] = useState(null);
     const [image, setImage] = useState(null);
     const [editor, setEditor] = useState(null);
+    const [scale, setScale] = useState(1.0);
     const fileInputRef = useRef();
 
     const setEditorRef = (editor) => setEditor(editor);
 
+    const onDrop = (acceptedFiles) => {
+        setFormImage(URL.createObjectURL(acceptedFiles[0]));
+    };
+
+    const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop });
+
+
+    const handleScale = (e) => {
+        setScale(parseFloat(e.target.value));
+    }
     const onSave = async (evt) => {
         evt.preventDefault();
-        const formData = new FormData()
-        formData.append('photo', formImage);
-        const updatedUser = await usersAPI.profilePic(formData)
-        setUser(updatedUser)
-        // console.log(updatedUser)
-    }
-    // const onSave = async () => {
-    //     if (editor) {
-    //         const canvasScaled = editor.getImageScaledToCanvas();
-    //         const blob = await new Promise((resolve) => canvasScaled.toBlob(resolve));
-
-    //         const formData = new FormData();
-    //         formData.append('file', blob);
-
-    //         try {
-    //             const profileUpdateResponse = await axios.put(
-    //                 '/api/users/profilepic',
-    //                 formData,
-    //                 {
-    //                     headers: {
-    //                         'Content-Type': 'multipart/form-data',
-    //                         Authorization: `Bearer ${localStorage.getItem('token')}`,
-    //                     },
-    //                 }
-    //             );
-
-    //             if (profileUpdateResponse.status === 200) {
-    //                 const updatedUser = profileUpdateResponse.data;
-    //                 const imageUrl = updatedUser.profilePicture;
-
-    //                 setProfileImage(imageUrl);
-    //                 setUser(updatedUser);
-    //                 console.log('Profile image saved successfully');
-    //             }
-    //         } catch (error) {
-    //             console.error('Error uploading and saving profile image:', error);
-    //         }
-    //     }
-    // };
-
-
+        if (editor) {
+            const canvasScaled = editor.getImageScaledToCanvas();
+            const formData = new FormData();
+            canvasScaled.toBlob((blob) => {
+                formData.append('photo', blob);
+                // Upload the image to your server
+                usersAPI.profilePic(formData).then((updatedUser) => {
+                    setUser(updatedUser)
+                    setProfileImage(URL.createObjectURL(blob))
+                });
+            });
+        }
+    };
 
     const [editingFields, setEditingFields] = useState({
         bio: false,
@@ -101,6 +86,7 @@ const Profile = ({ user, setUser }) => {
             setEditUser({ ...user });
         }
     };
+
     const renderField = (field) => {
         if (editingFields[field]) {
             return (
@@ -158,11 +144,40 @@ const Profile = ({ user, setUser }) => {
                     <p className="label">Date Joined:</p>
                     {renderField('dateJoined')}
                 </div>
-
             </div>
             <section>
                 <form onSubmit={onSave}>
-                    <input type='file' onChange={(evt) => setFormImage(evt.target.files[0])} />
+                    <div {...getRootProps()}>
+                        <input {...getInputProps()} />
+                        {
+                            isDragActive ?
+                                <p>Drop the files here ...</p> :
+                                <p>Drag 'n' drop some files here, or click to select files</p>
+                        }
+                    </div>
+                    {formImage &&
+                        <div>
+                            <AvatarEditor
+                                ref={setEditorRef}
+                                image={formImage}
+                                width={250}
+                                height={250}
+                                border={50}
+                                color={[255, 255, 255, 0.6]} // RGBA
+                                scale={scale}
+                                borderRadius={125} // to create a circular crop
+                            />
+                            <input
+                                name="scale"
+                                type="range"
+                                onChange={handleScale}
+                                min={1}
+                                max={2}
+                                step={0.01}
+                                defaultValue={scale}
+                            />
+                        </div>
+                    }
                     <button type='submit'>Save Photo</button>
                 </form>
             </section>
