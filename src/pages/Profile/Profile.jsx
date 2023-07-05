@@ -101,15 +101,6 @@ const Profile = ({ user, setUser }) => {
                         Authorization: `Bearer ${localStorage.getItem('token')}`,
                     },
                 });
-
-                // Delete the user's ObjectId from all summaries they voted on
-                await axios.put(`/api/summaries/removeUserVotes/${user._id}`, {
-                    headers: {
-                        'Content-Type': 'application/json',
-                        Authorization: `Bearer ${localStorage.getItem('token')}`,
-                    },
-                });
-
                 // After the account has been deleted and summaries updated, clear the localStorage.
                 localStorage.clear();
 
