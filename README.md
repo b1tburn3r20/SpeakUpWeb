@@ -16,16 +16,23 @@ With SpeakUp, governmental decisions are no longer hidden within pages of convol
 
 ## Technologies Used
 - Front End
-    - React.js
+    - React.jsx
+    - JS
     - CSS
     - HTML5
+    - Others..
 - Back End
     - Node.js
     - Express.js
+    - Others..
 - Database
     - MongoDB
 - Libraries/APIs
     - React Router DOM
+    - ReactECharts
+    - ReactDropzone
+    - ReactAvatarEditor
+    - ReactLoading
     - JSON Web Token (JWT)
     - BCrypt
     - Mongoose
