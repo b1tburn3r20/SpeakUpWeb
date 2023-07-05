@@ -62,7 +62,7 @@ export default function Home() {
                             <header className="card__header">
                                 <h3 className="plan__name">Basic Plan</h3>
                                 <span className="plan__price">$0.70</span>
-                                <span className="plan__billing--cycle">per MB</span>
+                                <span className="plan__billing--cycle">/ MB</span>
                                 <span className="plan__description">Access and analyze extensive datasets</span>
                             </header>
                             <div className="card__body">
@@ -81,7 +81,7 @@ export default function Home() {
                             <header className="card__header">
                                 <h3 className="plan__name">Advanced Plan</h3>
                                 <span className="plan__price">$0.99</span>
-                                <span className="plan__billing--cycle">per MB</span>
+                                <span className="plan__billing--cycle">/ MB</span>
                                 <span className="plan__description">Efficient extraction and analysis</span>
                             </header>
                             <div className="card__body">
@@ -100,7 +100,7 @@ export default function Home() {
                             <header className="card__header">
                                 <h3 className="plan__name">Premium Plan</h3>
                                 <span className="plan__price">$1.20</span>
-                                <span className="plan__billing--cycle">per MB</span>
+                                <span className="plan__billing--cycle">/ MB</span>
                                 <span className="plan__description">Deep insights and advanced analytics</span>
                             </header>
                             <div className="card__body">
@@ -337,7 +337,7 @@ export default function Home() {
                     </section>
                     <div className="footer__brand">
                         <img src="images/logo.svg" alt="" />
-                        <p className="footer__copyright">Copyright 2023 DoubleKing</p>
+                        <p className="footer__copyright">Copyright 2023 SpeakUp</p>
                     </div>
                 </div>
             </footer>

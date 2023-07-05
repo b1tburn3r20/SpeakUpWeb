@@ -28,10 +28,11 @@
   font-weight: bold;
   display: inline-block;
   padding: 0.4rem .6rem;
-  border: 2px solid var(--text-light);
+  border: 2px solid var(--text-dark);
   border-radius: 15px;
   transition: background-color 0.6s ease;
 }
+
 .logout-link {
   color: var(--soft-red);
   text-decoration: none;
@@ -68,7 +69,7 @@
 }
 .welcome-msg:hover {
   background-color: var(--hover-color);
-  color: var(--text-light);
+  color: black;
 }
 .wlcmsg {
   color: var(--text-dark);
@@ -81,12 +82,15 @@
   transition: max-height 0.3s ease;
   visibility: hidden;
   opacity: 0;
+  color: black;
 }
 
 .dropdown-options.show {
   max-height: 200px;  
   visibility: visible;
   opacity: 1;
+  color: black;
+
   transition: max-height 0.3s ease, visibility 0s linear 0s, opacity 0.3s linear;
 }
 
@@ -97,7 +101,7 @@
   background-color: none ;
 }
 a{
-  color: var(--text-light);
+  color: var(--text-dark);
   text-decoration: none;
   font-weight: bold;
 }
