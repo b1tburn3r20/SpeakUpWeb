@@ -12,6 +12,7 @@ module.exports = {
   checkToken,
   getVotedBills,
   uploadProfilePic,
+  deleteUser,
 };
 
 
@@ -22,15 +23,32 @@ function checkToken(req, res) {
   res.json(req.exp);
 }
 
+async function deleteUser(req, res) {
+  try {
+    // Make sure the user can only delete their own account
+    const user = await User.findById(req.user._id); // req.user._id should be set after JWT authentication
+    if (!user) throw new Error('User not found');
+    await user.remove();
+    res.status(200).json({ message: 'User deleted' });
+  } catch (err) {
+    console.log(err)
+    res.status(400).json(err.message);
+  }
+}
+
 async function create(req, res) {
   try {
+    console.log('Request body:', req.body);
+
     const user = await User.create(req.body);
     const token = createJWT(user);
     res.json(token);
   } catch (err) {
+    console.error('Error during user creation:', err);
     res.status(400).json(err);
   }
 }
+
 
 async function uploadProfilePic(req, res) {
   console.log(req.file)

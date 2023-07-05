@@ -10,47 +10,35 @@ const voteSchema = new Schema({
   vote: String
 });
 
-const userSchema = new Schema({
-  name: { type: String, required: true },
+const userSchema = new mongoose.Schema({
+  name: {
+    type: String,
+    required: true,
+  },
   email: {
     type: String,
+    required: true,
     unique: true,
-    trim: true,
-    lowercase: true,
-    required: true
   },
   password: {
     type: String,
-    required: true
+    required: true,
   },
-  role: {
-    type: String,
-    enum: ['user', 'admin', 'developer', 'politician'],
-    default: 'user'
+  profilePicture: String,
+  bio: String,
+  pronouns: {
+    type: [
+      {
+        type: String,
+        enum: ['He/Him', 'She/Her', 'They/Them', 'It/Its', 'Other', 'Unspecified'],
+      },
+    ],
+    default: ['Unspecified'],
   },
-  profilePicture: { type: String, default: 'https://i.imgur.com/7mXutdU.jpg' },
-  votes: [{
-    summary: {
-      type: Schema.Types.ObjectId,
-      ref: 'Summary'
-    },
-    vote: {
-      type: String,
-      enum: ['pass', 'veto'],
-      required: true
-    }
-  }],
-  bio: { type: String, default: "bio" },
-  pronouns: { type: String, default: "pronouns" },
-  dateJoined: { type: Date, default: Date.now }
-}, {
-  timestamps: true,
-  toJSON: {
-    transform: function (doc, ret) {
-      delete ret.password;
-      return ret;
-    }
-  }
+  dateJoined: {
+    type: Date,
+    default: Date.now,
+  },
 });
 
 

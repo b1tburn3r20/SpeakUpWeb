@@ -1,56 +1,51 @@
 .profile-card {
-  display: grid;
-  grid-template-columns: 1fr 2fr;
-  gap: 20px;
-  background-color: #f5f6fa; /* cool grey */
+  position: relative; /* Add this line to set the profile card as a relative container */
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: #f5f6fa;
   border-radius: 15px;
   box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
   padding: 20px;
-  margin: 20px auto;
   max-width: 800px;
   font-family: 'Arial', sans-serif;
+  margin: 0 auto;
 }
 
 .profile-card .profile-pic-upload {
   grid-row: span 3;
   display: flex;
-  justify-content: center;
   align-items: center;
-  width: 100%;
   height: auto;
+  width: auto;
 }
-
 .profile-card .profile-pic {
   max-width: 100%;
   height: auto;
   border-radius: 50%;
 }
-
 .profile-card h2, .profile-card h3 {
   margin-top: 0;
 }
-
 .profile-card h2 {
   font-size: 28px;
   margin-bottom: 15px;
 }
-
 .profile-card h3 {
   font-size: 20px;
   margin-bottom: 10px;
   color: #007BFF;
 }
-
 .profile-card p, .profile-card div {
   font-size: 16px;
   margin-bottom: 5px;
 }
-
 .profile-card .label {
   font-weight: bold;
   font-size: 18px;
 }
-
 .profile-card input[type="text"] {
   width: 100%;
   padding: 5px;
@@ -58,46 +53,109 @@
   border-bottom: 2px solid #007BFF;
   margin-bottom: 10px;
 }
-
-[data-theme="dark"] .drag-n-drop{
+[data-theme="dark"] .drag-n-drop {
   border: 2px dotted rgba(255, 255, 255, 0.5);
 }
-.drag-n-drop{
+.drag-n-drop {
   border: 2px dotted rgba(0, 0, 0, 0.5);
   border-radius: 10px;
-
+  margin-top: -20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 300px !important;
+  height: 100px;
 }
 .profile-card .info-group {
   padding: 10px;
 }
-.activeUser{
+.activeUser {
   display: flex;
   flex-direction: column;
+  text-align: center;
+  position: relative; /* Add this line to set the activeUser as a relative container */
+
 }
 [data-theme="dark"] .profile-card {
-  background-color: #2f3640; /* cool dark grey */
+  background-color: #2f3640;
   color: white;
 }
-
-.info-group-container{
+.info-group-container {
   display: flex;
   flex-direction: row;
 }
-.info-group{
+.info-group {
   margin-left: 3rem;
 }
-.activeUser {
-  text-align: center;
-}
-
 .activeUser .profileImageWrapper {
   display: flex;
   justify-content: center;
 }
-
 .activeUser img {
   width: 150px;
   height: 150px;
   border-radius: 50%;
   object-fit: cover;
+}
+.profile-card .profileImageWrapper {
+  display: flex;
+}
+.profile-card .edit-icon {
+  top: 50px !important;
+  right: -25px !important;
+  color: #ababab;
+  cursor: pointer;
+}
+.profileImageWrapper {
+  border: 3px solid lightgrey;
+  border-radius: 50%;
+}
+.delete-button {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  background-color: grey;
+  color: white;
+  padding: 5px 10px;
+  font-size: 0.8rem;
+}
+.profile-card select {
+  position: relative;
+  background-color: transparent;
+  color: white;
+  outline: none;
+  border: none;
+}
+
+.profile-card .save-button {
+  position: absolute;
+  top: 0;
+  right: -25px;
+  color: rgb(166, 166, 166);
+  cursor: pointer;
+}
+
+.profile-card .save-button:hover {
+  color: rgb(255, 255, 255);
+}
+
+.profile-card select {
+  position: relative;
+  background-color: transparent;
+  color: white;
+  outline: none;
+  border: none;
+}
+
+.profile-card .save-button {
+  position: absolute;
+  top: 50%;
+  right: -25px;
+  transform: translateY(-50%);
+  color: rgb(166, 166, 166);
+  cursor: pointer;
+}
+
+.profile-card .save-button:hover {
+  color: rgb(255, 255, 255);
 }

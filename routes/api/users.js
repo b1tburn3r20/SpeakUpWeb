@@ -38,5 +38,7 @@ router.put('/users/profile', ensureLoggedIn, async (req, res) => {
         res.status(500).send(error);
     }
 });
+router.delete('/profile', ensureLoggedIn, usersCtrl.deleteUser);
+
 
 module.exports = router;

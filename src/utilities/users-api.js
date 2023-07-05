@@ -16,3 +16,6 @@ export function checkToken() {
 export function profilePic(formData) {
   return sendRequest(`${BASE_URL}/profilepic`, 'POST', formData, true)
 }
+export function deleteUser() {
+  return sendRequest(`${BASE_URL}/profile`, 'DELETE');
+}
