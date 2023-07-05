@@ -1,10 +1,16 @@
 # SpeakUp
 
 ## Introduction
-SpeakUp is a web application designed to promote active citizenship through facilitating the process of reading, understanding, and voting on legislation. Users can browse various bills, summaries of those bills, and cast their vote, all while engaging in a discussion with other users in the community.
+SpeakUp is a web application created to enhance democratic transparency and foster active citizenship. It directly addresses the challenge of understanding complex legislative language that often obscures the true impact of laws being passed. 
+
+By transforming lengthy, verbose legislative documents into comprehensible summaries, SpeakUp enables users to easily read, understand, and vote on various bills. The aim is to empower every citizen to partake in their democracy, removing the barrier of legal jargon and fostering open and accessible dialogue on issues that matter.
+
+With SpeakUp, governmental decisions are no longer hidden within pages of convoluted documentation. Users can browse, comprehend, and interact with actual bills, engaging in the democratic process in a way that's accessible, transparent, and impactful.
+
 
 **Screenshots**
-*Include screenshots here. You can add a screenshot by following this syntax in markdown.*
+*Picture 1 is of the Home page.*
+*Picture 2 is of the Voting page.*
 ![SpeakUp App Screenshot](https://i.imgur.com/6f8P66P.png)
 ![SpeakUp App Screenshot](https://i.imgur.com/pi8yFwJ.png)
 
