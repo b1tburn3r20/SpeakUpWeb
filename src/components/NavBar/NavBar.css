@@ -84,7 +84,7 @@
 }
 
 .dropdown-options.show {
-  max-height: 200px;  /* Change this to the maximum height your dropdown could reach */
+  max-height: 200px;  
   visibility: visible;
   opacity: 1;
   transition: max-height 0.3s ease, visibility 0s linear 0s, opacity 0.3s linear;

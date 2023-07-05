@@ -50,7 +50,7 @@ const Profile = ({ user, setUser }) => {
 
     const handleEditClick = () => {
         setIsEditing(true);
-        setDisplayButtons(true); // show the Cancel button and dropzone when the edit button is clicked
+        setDisplayButtons(true);
         setDisplayDropzone(true);
 
 
@@ -83,7 +83,7 @@ const Profile = ({ user, setUser }) => {
         setDisplayDropzone(false);
         setDisplaySaveButton(false);
         setFormImage(false);
-        setIsEditing(false); // Exit editing mode
+        setIsEditing(false);
     };
 
     const handleDelete = async () => {
@@ -130,7 +130,6 @@ const Profile = ({ user, setUser }) => {
     const saveField = async (field) => {
         try {
             const res = await axios.put(
-                // assuming your backend accepts a PUT request for updating user details
                 '/api/users/profile',
                 {
                     userId: user._id,
@@ -145,7 +144,7 @@ const Profile = ({ user, setUser }) => {
                 }
             );
 
-            const updatedUser = res.data; // assuming your backend returns the updated user as a response
+            const updatedUser = res.data;
             setUser(updatedUser);
         } catch (error) {
             console.error('Error:', error);
@@ -277,9 +276,9 @@ const Profile = ({ user, setUser }) => {
                                 width={150}
                                 height={150}
                                 border={50}
-                                color={[255, 255, 255, 0.6]} // RGBA
+                                color={[255, 255, 255, 0.6]}
                                 scale={scale}
-                                borderRadius={125} // to create a circular crop
+                                borderRadius={125}
                             />
                             <input
                                 name="scale"
@@ -290,7 +289,7 @@ const Profile = ({ user, setUser }) => {
                                 step={0.01}
                                 defaultValue={scale}
                             />
-                            {imageSelected && <button type="submit">Save Photo</button>} {/* Show the save button only if an image is selected */}
+                            {imageSelected && <button type="submit">Save Photo</button>}
                         </div>
                     )}
                 </form>

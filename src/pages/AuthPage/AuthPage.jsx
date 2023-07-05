@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import SignUpForm from '../../components/SignUpForm/SignUpForm';
 import LoginForm from '../../components/LoginForm/LoginForm';
-import axios from 'axios'; // Import axios for making HTTP requests
+import axios from 'axios';
 
 export default function AuthPage({ setUser }) {
   const [showSignUp, setShowSignUp] = useState(true);

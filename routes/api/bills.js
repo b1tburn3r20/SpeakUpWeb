@@ -2,7 +2,6 @@ const express = require('express');
 const router = express.Router();
 const checkToken = require('../../config/checkToken');
 
-// Include the bill model
 const Bill = require('../../models/Summary');
 const Vote = require('../../models/Vote');
 const User = require('../../models/user')

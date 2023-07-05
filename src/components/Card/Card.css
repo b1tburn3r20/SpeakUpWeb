@@ -175,10 +175,8 @@
 }
 
 
-/* Existing styles */
 
 .card {
-  /* Existing styles */
   position: relative;
   z-index: 5;
 }
@@ -203,35 +201,29 @@
 
 }
 .card {
-  /* Existing styles */
   position: relative;
   z-index: 1 !important;
 }
-/* Define your custom colors */
 :root {
   --soft-green: #4cd16d;
   --light-red: #ff6565;
 }
 
-/* Default styles */
 .alreadyVoted {
   background-color: var(--soft-green);
   color: #fff;
 }
 
-/* Dark theme styles */
 [data-theme="dark"] .alreadyVoted {
   background-color: #207adf;
   color: #fff;
 }
 
-/* Styles when the user has vetoed */
 .userVetoed .alreadyVoted {
   background-color: var(--light-red);
   color: #fff;
 }
 
-/* Dark theme styles when the user has vetoed */
 [data-theme="dark"] .userVetoed .alreadyVoted {
   background-color: #904042;
   color: #fff;

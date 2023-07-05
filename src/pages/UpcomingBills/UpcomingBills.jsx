@@ -74,7 +74,7 @@ export default function UpcomingBills({ user }) {
                     bill_name={bill.bill_name}
                     summary={bill.summary}
                     tags={bill.tags}
-                    userVote={bill.userVote} // Include user's vote
+                    userVote={bill.userVote}
                     showHelpsAndHurts={false}
                     className="fade-in"
                     data-aos="fade-in"

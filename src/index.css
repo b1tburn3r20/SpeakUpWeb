@@ -98,8 +98,8 @@ form {
   background-color: var(--grey-100);
   border: .1vmin solid var(--grey-300);
   border-radius: 1vmin;
-  width: 450px; /* Set the width to 450px */
-  margin: 0 auto; /* Center the form horizontally */
+  width: 450px; 
+  margin: 0 auto; 
 }
 
 label {

@@ -4,7 +4,6 @@ import { BrowserRouter as Router } from 'react-router-dom';
 import './index.css';
 import App from './pages/App/App';
 
-// Add the Font Awesome script tag dynamically
 const script = document.createElement('script');
 script.src = 'https://kit.fontawesome.com/1546d6398c.js';
 script.crossOrigin = 'anonymous';

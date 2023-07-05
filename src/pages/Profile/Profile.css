@@ -2,7 +2,7 @@
   display: grid;
   grid-template-columns: 1fr 2fr;
   gap: 20px;
-  background-color: #f5f6fa; /* cool grey */
+  background-color: #f5f6fa; 
   border-radius: 15px;
   box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
   padding: 20px;
@@ -75,7 +75,7 @@
   flex-direction: column;
 }
 [data-theme="dark"] .profile-card {
-  background-color: #2f3640; /* cool dark grey */
+  background-color: #2f3640; 
   color: white;
 }
 

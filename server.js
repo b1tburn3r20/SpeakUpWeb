@@ -73,7 +73,6 @@ app.post('/api/users/upload', upload.single('profilepic'), (req, res, next) => {
     return res.status(400).json({ error: 'No file provided' });
   }
 
-  // You can perform additional logic here if needed
   console.log(file.path)
   return res.json({ fileUrl: file.path });
 });
@@ -121,7 +120,6 @@ app.post('/api/vote', async (req, res) => {
 app.post('/api/todos', (req, res) => {
   const { title, description, dueDate } = req.body;
 
-  // Assuming you have the Todo model imported correctly
   const newTodo = new Todo({
     title,
     description,

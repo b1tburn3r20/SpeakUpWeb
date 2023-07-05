@@ -34,8 +34,7 @@ async function create(req, res) {
 }
 async function deleteUser(req, res) {
   try {
-    // Make sure the user can only delete their own account
-    const user = await User.findById(req.user._id); // req.user._id should be set after JWT authentication
+    const user = await User.findById(req.user._id);
     if (!user) throw new Error('User not found');
     await user.remove();
     res.status(200).json({ message: 'User deleted' });
@@ -49,7 +48,6 @@ async function uploadProfilePic(req, res) {
   console.log(req.file)
   try {
     if (req.file) {
-      // The uploadFile function will return the uploaded file's S3 endpoint
       const photoURL = await uploadFile(req.file);
       const user = await User.findById(req.user._id); // req.user._id should be set after JWT authentication
       user.profilePicture = photoURL;
@@ -96,7 +94,6 @@ async function upload(req, res) {
   }
 }
 
-/* Add this function */
 async function getVotedBills(req, res) {
   try {
     // Fetch the bills that the user has voted on from your database

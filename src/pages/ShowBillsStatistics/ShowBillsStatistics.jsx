@@ -45,7 +45,7 @@ export default function ShowBillStatistics() {
         fetchData();
     }, [billId]);
 
-    // Create graph data and options based on votingData
+    // Create the graph data and options based on votingData
     const voteOption = {
         title: {
             text: 'Vote Comparison'
@@ -73,7 +73,7 @@ export default function ShowBillStatistics() {
         tooltip: {},
         legend: {
             orient: 'vertical',
-            top: 50, // Adjust this value to fit your needs
+            top: 50,
             left: 10,
             data: ['Voted', 'Did Not Vote']
         },

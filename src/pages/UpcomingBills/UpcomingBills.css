@@ -47,7 +47,7 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
-    align-items: flex-start; /* Aligns items to the top */
+    align-items: flex-start; 
   }
   .page-title{
     margin-bottom: 2rem;

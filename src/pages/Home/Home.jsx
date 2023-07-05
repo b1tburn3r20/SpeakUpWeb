@@ -5,7 +5,7 @@ import happyCustomer from './images/Satisfied-Customers.png'
 import consoleImage from './images/console.png'
 import statisticInput from './images/statistics.png'
 import React from 'react';
-import './Home.css'; // Import your custom stylesheet for the Home page
+import './Home.css';
 
 export default function Home() {
     return (

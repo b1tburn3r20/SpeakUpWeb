@@ -19,11 +19,9 @@ const Todo = () => {
         event.preventDefault();
         try {
             const response = await axios.post('/api/todos', todoData);
-            console.log(response.data); // Assuming the response contains the newly created todo
-            // Do something with the response, e.g., update the UI or display a success message
+            console.log(response.data);
         } catch (error) {
             console.error(error);
-            // Handle error cases
         }
     };
 
