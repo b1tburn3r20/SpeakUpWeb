@@ -38,7 +38,6 @@ To get started with SpeakUp, you can visit our [Trello board](<https://trello.co
 1. Complex bills still require manual summarization for easy understanding.
 2. Real-time vote update feature still to be implemented.
   
-*Please update these unsolved problems as per your current application status.*
 
 ## Future Enhancements
 1. Incorporation of a feature that automates the summarization of complex bills.
