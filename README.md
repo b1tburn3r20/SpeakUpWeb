@@ -30,7 +30,7 @@ With SpeakUp, governmental decisions are no longer hidden within pages of convol
     - BCrypt
     - Mongoose
     - Axios
-    - Google [Places % Maps] API
+    - Google [Places & Maps] API
 ## Getting Started
 To get started with SpeakUp, you can visit our [Trello board](<https://trello.com/invite/b/HqYBxtL6/ATTI6de24c68887b4f6df624930943d8f2f95A02201F/speakup>) to see the workflow and planning involved in creating this project. Also, check out the live application [here](<https://speakupreact-42bdd47d2aed.herokuapp.com/>).
 
