@@ -109,14 +109,24 @@ app.put('/api/users/profile', async (req, res) => {
 app.post('/api/vote', async (req, res) => {
   const { userId, billId, vote } = req.body;
   console.log(`UserId: ${userId}, BillId: ${billId}, Vote: ${vote}`);
-  const user = await User.findById(userId);
-  user.votes.push({ summary: billId, vote: vote });
-  await user.save();
-  const summary = await Summary.findById(billId);
-  summary[vote].push(userId);
-  await summary.save();
-  res.json({ status: 'Vote recorded' });
+  try {
+    const user = await User.findById(userId);
+    console.log('User:', user);
+    user.votes.push({ summary: billId, vote: vote });
+    await user.save();
+    console.log('User after saving:', user);
+    const summary = await Summary.findById(billId);
+    console.log('Summary:', summary);
+    summary[vote].push(userId);
+    await summary.save();
+    console.log('Summary after saving:', summary);
+    res.json({ status: 'Vote recorded' });
+  } catch (error) {
+    console.error('Error:', error);
+    res.status(500).json({ error: 'Failed to record vote' });
+  }
 });
+
 
 app.post('/api/todos', (req, res) => {
   const { title, description, dueDate } = req.body;
