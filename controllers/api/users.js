@@ -12,6 +12,7 @@ module.exports = {
   checkToken,
   getVotedBills,
   uploadProfilePic,
+  deleteUser,
 };
 
 
@@ -29,6 +30,18 @@ async function create(req, res) {
     res.json(token);
   } catch (err) {
     res.status(400).json(err);
+  }
+}
+async function deleteUser(req, res) {
+  try {
+    // Make sure the user can only delete their own account
+    const user = await User.findById(req.user._id); // req.user._id should be set after JWT authentication
+    if (!user) throw new Error('User not found');
+    await user.remove();
+    res.status(200).json({ message: 'User deleted' });
+  } catch (err) {
+    console.log(err)
+    res.status(400).json(err.message);
   }
 }
 
